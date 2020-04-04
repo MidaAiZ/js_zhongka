@@ -1,0 +1,256 @@
+<!-- page heading start-->
+<div class="page-heading">
+  <div class="row">
+    <div class="col-md-2">
+      <h3>
+        众卡之家后台管理
+      </h3>
+      <ul class="breadcrumb">
+        <li>
+          <a href="#">管理员</a>
+        </li>
+        <li class="active">
+          首页
+        </li>
+      </ul>
+    </div>
+      <div class="col-md-10">
+        <div class="state-info">
+          <section class="panel">
+            <div class="panel-body">
+              <div class="summary">
+                <span>今日成交额</span>
+                <h3 class="red-txt" id='today-money'>-</h3>
+              </div>
+              <div id="money" class="chart-bar"></div>
+            </div>
+          </section>
+          <section class="panel">
+            <div class="panel-body">
+              <div class="summary">
+                <span>今日订单</span>
+                <h3 class="red-txt" id='t-o-count'>-</h3>
+              </div>
+              <div id="income" class="chart-bar"></div>
+            </div>
+          </section>
+          <section class="panel">
+            <div class="panel-body">
+              <div class="summary">
+                <span>今日活跃用户</span>
+                <h3 class="green-txt" id='t-v-count'>-</h3>
+              </div>
+              <div id="expense" class="chart-bar"></div>
+            </div>
+          </section>
+          <section class="panel">
+            <div class="panel-body">
+              <div class="summary">
+                <span>今日新用户</span>
+                <h3 class="blue-txt" id='t-u-count'>-</h3>
+              </div>
+              <div id="newuser" class="chart-bar"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- page heading end-->
+  <!--body wrapper start-->
+  <div class="wrapper">
+    <div class="row">
+      <div class="col-md-6">
+        <!--statistics start-->
+        <div class="row state-overview">
+          <div class="col-md-6 col-xs-6 col-sm-6">
+            <div class="panel purple">
+              <div class="symbol">
+                <i class="fa fa-user"></i>
+              </div>
+              <div class="state-value">
+                <div class="value">
+                  <%#= link_to '-', users_path, id: 'u-count' %>
+                </div>
+                <div class="title">用户数</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-xs-6 col-sm-6">
+            <div class="panel red">
+              <div class="symbol">
+                <i class="fa fa-desktop"></i>
+              </div>
+              <div class="state-value">
+                <div class="value">
+                  <%#= link_to '-', products_path, id: 'p-count' %>
+                </div>
+                <div class="title">商品数</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--statistics end-->
+        <div class="row state-overview">
+          <div class="col-md-6 col-xs-6 col-sm-6">
+            <div class="panel blue">
+              <div class="symbol">
+                <i class="glyphicon glyphicon-shopping-cart"></i>
+              </div>
+              <div class="state-value">
+                <div class="value">
+                  <%#= link_to '-', orders_path, id: 'order-count' %>
+                </div>
+                <div class="title">
+                  订单总数
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-xs-6 col-sm-6">
+            <div class="panel green">
+              <div class="symbol">
+                <i class="fa fa-money"></i>
+              </div>
+              <div class="state-value">
+                <div class="value">
+                  <a href="#" id="total-money">-</a>
+                </div>
+                <div class="title">
+                  总成交额
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <!--more statistics box start-->
+        <div class="panel deep-purple-box">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-7 col-sm-7 col-xs-7">
+                <div id="graph-donut" class="revenue-graph"></div>
+
+              </div>
+              <div class="col-md-5 col-sm-5 col-xs-5">
+                <ul class="bar-legend"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--more statistics box end-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="panel">
+          <div class="panel-body">
+            <div class="row revenue-states">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <h4>近期流量情况</h4>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <ul class="revenue-nav">
+                  <li class="pull-left">
+                    <div id="main-chart-legend"></div>
+                  </li>
+                  <li class="pull-right" style="margin-right: 15px">
+                    <a href="javascript: void(0)">近一周</a>
+                  </li>
+                  <!-- <li><a href="#">monthly</a></li> <li class="active"><a href="#">yearly</a></li> -->
+                </ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+
+                <div id="main-chart">
+                  <div id="main-chart-container" class="main-chart"></div>
+                </div>
+                <!-- <ul class="revenue-short-info"> <li> <h1 class="red">15%</h1> <p>Server Load</p> </li> <li> <h1 class="purple">30%</h1> <p>Disk Space</p> </li> <li> <h1 class="green">84%</h1> <p>Transferred</p> </li> <li> <h1 class="blue">28%</h1>
+                <p>Temperature</p> </li> </ul> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel">
+          <header class="panel-heading">
+            新用户
+            <span class="tools pull-right">
+              <a href="javascript:;" class="fa fa-chevron-up toggle-show"></a>
+              <a href="javascript:;" class="fa fa-times"></a>
+            </span>
+          </header>
+          <div class="panel-body">
+            <ul class="goal-progress">
+              <%# @new_users.each do |u| %>
+                <!-- <li>
+                  <div class="prog-avatar">
+                    <%#= image_tag u.avatar_url %>
+                  </div>
+                  <div class="details">
+                    <div class="title">
+                      <%#= link_to u.number || '', user_path(u) %>
+                      -
+                      <%#= u.phone %>
+                    </div>
+                    <div class="u-info">
+                      <p>
+                        <span>学校:
+                          <%#= u.school.name if u.school %></span>
+                        - 专业:
+                        <span><%#= u.major %></span>
+                        -
+                        <span>年级:
+                          <%#= u.grade %></span></p>
+                    </div>
+                  </div>
+                </li> -->
+              <%# end %>
+            </ul>
+            <div class="text-center"><%#= link_to '查看所有用户', users_path %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="panel">
+          <div class="panel-body extra-pad">
+            <h4 class="pros-title">商品流量统计
+              <span></span></h4>
+            <div class="col-sm-6 col-xs-6">
+              <div id="visit-1"></div>
+              <div class="v-info">今日访问量</div>
+              <div class="v-value" id='p-t-v-count'>-</div>
+            </div>
+            <div class="col-sm-6 col-xs-6">
+              <div id="visit-2"></div>
+              <div class="v-info">总访问量</div>
+              <div class="v-value" id='p-v-count'>-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-md-4"> <div class="panel green-box"> <div class="panel-body extra-pad"> <div class="row"> <div class="col-sm-6 col-xs-6"> <div class="knob"> <span class="chart" data-percent="0" id='p-v-count-percent'> <span class="percent"><span
+      id='p-v-count-percent-v'>- </span><span class="sm">商品访客占比</span> </span> </span> </div> </div> <div class="col-sm-6 col-xs-6"> <div class="knob"> <span class="chart" data-percent="0" id='m-v-count-percent'> <span class="percent"><span
+      id='m-v-count-percent-v'>- </span><span class="sm">资料访客占比</span> </span> </span> </div> </div> </div> </div> </div> </div> -->
+    </div>
+    <footer>
+      <div class='t-v'>
+        <h4>
+          <i class='fa fa-globe'></i>本站访客总量:
+          <span id="v-total">
+            -</span>
+        </h4>
+      </div>
+    </footer>
+  </div>
+  <!--body wrapper end-->
+</div>
+<!-- main content end-->
+
+<%= javascript_include_tag 'chart-init' %>

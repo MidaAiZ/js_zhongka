@@ -1,0 +1,119 @@
+<!-- page heading start -->
+<!--<div class="page-heading">-->
+    <!--Page Tittle goes here-->
+<!--</div>-->
+<!-- page heading end-->
+
+<!--body wrapper start-->
+<div class="wrapper a-details">
+
+    <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-4 col-sm-offset-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="profile-pic text-center">
+                                <a href="javascript:void(0);" id="cropfile">
+                                    <i class='fa fa-edit'></i>
+                                    <img src="<%= @admin.avatar_url %>" class='admin-avatar' data-id="<%= @admin.id %>">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <ul class="p-info">
+                                <li>
+                                    <div class="title">帐号</div>
+                                    <div class="desk"><%= @admin.number %></div>
+                                </li>
+                                <li>
+                                    <div class="title">角色</div>
+                                    <div class="desk"><%= translate_role @admin.role %></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 修改头像 -->
+<div class="modal fade" id="cropModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog cropper">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <p class="modal-title" id="Label">修改头像</p>
+      </div>
+      <div class="editarea">
+        <div class="croparea">
+          <span class="file-beauty btn btn-primary">
+            <span class="glyphicon glyphicon-arrow-up">上传图片</span>
+            <%= form_tag "", id: "cropForm" do %>
+              <input type="file" name="avatar" class="cropable" id="inputFile" />
+              <input id="posi_x" type="hidden" value="0" name="x"/>
+              <input id="posi_y" type="hidden" value="0" name="y"/>
+              <input id="img_width" type="hidden" value="200" name="width"/>
+              <input id="img_height" type="hidden" value="200" name="height"/>
+              <input id="img_rotate" type="hidden" value="0" name="rotate"/>
+            <% end %>
+          </span>
+          <p id="alertType"></p>
+          <div class="showpics">
+            <img src="<%= @admin.avatar_url %>" id='imagefile'>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" id="lrotate">
+              <span class="glyphicon glyphicon-share-alt rotatey"></span>
+            </button>
+            <button type="button" class="btn btn-primary" id="rrotate">
+              <span class="glyphicon glyphicon-share-alt"></span>
+            </button>
+          </div>
+          <button type="button" class="btn btn-primary" id="reset">
+            <span class="glyphicon glyphicon-repeat"></span>
+          </button>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" data-loading-text="更新中..." id="subcrop">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag "share/crop" %>
+<%= stylesheet_link_tag "share/crop" %>
+<script>
+    // 修改头像
+    $(function() {
+        //文件上传
+        $('#subcrop').on("click", function() {
+            uploadCrop("/admins/update/avatar", avatarCB, "POST");
+        });
+
+        function avatarCB(res) {
+            $.ajax({
+              type: 'post',
+              url: '/admins/update/avatar',
+              data: {
+                admin: {
+                  avatar: res.key
+                }
+              },
+              dataType: 'json'
+            })
+            $(".admin-avatar").attr("src", res.link)
+        }
+    })
+</script>
+<!--body wrapper end-->

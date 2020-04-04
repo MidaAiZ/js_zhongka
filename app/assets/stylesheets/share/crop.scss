@@ -1,0 +1,82 @@
+@import 'cropper';
+
+.modal-dialog.cropper {
+    width : 400px;
+    margin: 100px auto auto;
+}
+
+.editarea {
+    padding: 0 10px;
+    text-align: left;
+    color: black;
+
+    .croparea {
+        margin: 10px 0;
+
+        #alertType {
+            display: inline-block;
+
+            margin: 5px;
+            padding: 10px / 2;
+        }
+
+        .file-tip {
+            display: inline-block;
+        }
+
+        .showpics {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            width: 100%;
+            height: auto;
+            min-height: 200px;
+            max-height: 400px;
+            margin: auto;
+
+            .cropper-container {
+                margin: 10px 0 0 -10px;
+            }
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .btn-group {
+            .rotatey {
+                transform: rotateY(180deg);
+            }
+        }
+    }
+}
+@media (max-width: 480px) {
+    .modal-dialog.cropper {
+        width: 360px;
+        margin: 50px auto auto;
+    }
+
+    .cropper-canvas,
+    .cropper-crop-box {
+        margin-left: -5%;
+    }
+}
+@media (max-width: 400px) {
+    .modal-dialog.cropper {
+        width: 300px;
+        margin: 50px auto auto;
+    }
+
+    .editarea {
+        margin-right: -10px;
+    }
+
+    .cropper-container {
+        width: 100% !important;
+
+        .cropper-canvas,
+        .cropper-crop-box {
+            margin-left: -20.5%;
+        }
+    }
+}

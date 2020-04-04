@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>JsZongka</title>
+    <title>江苏众卡之家管理系统</title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_link_tag params[:controller], media: 'all' %>
+    <%= stylesheet_link_tag 'style', media: 'all' %>
+    <%= stylesheet_link_tag 'style-responsive', media: 'all' %>
+    <script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
   </head>
 
-  <body>
+  <body class='left-side-collapsed'>
+    <%= render '/layouts/nav' %>
     <%= yield %>
+    <!-- main content end-->
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag params[:controller] %>
   </body>
 </html>

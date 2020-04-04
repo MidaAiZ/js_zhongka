@@ -1,0 +1,83 @@
+
+@media screen and (max-width: 768px) {
+
+	.bt-nav {
+
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: #f9f9f9;
+		.nav-item {
+			width: 100%;
+			padding-left: 0;
+			margin: 0;
+			li {
+				position: relative;
+				list-style: none;
+				display: inline-block;
+				width: 20%;
+				float: left;
+				padding: 4px 1px 1px;
+				text-align: center;
+				a {
+					color: #929292;
+					text-decoration: none;
+					cursor: pointer;
+					&.active i,
+					&:active i {
+						color: #ff6666;
+					}
+				}
+				i {
+					display: block;
+					font-size: 21px;
+					color: #828282;
+					margin-bottom: -3px;
+				}
+				span {
+					display: block;
+					font-size: 8px;
+				}
+				&.new {
+					position: relative;
+					a {
+						height: 45px;
+						width: 45px;
+						border-radius: 50%;
+						margin-top: -10px;
+						display: inline-block;;
+						i {
+							border-radius: 50%;
+							background: #ff6666;
+							font-size: 40px;
+							color: white;
+							height: 45px;
+							line-height: 45px;
+						}
+					}
+				}
+			}
+		}
+
+
+		.badge {
+		    position: absolute;
+		    right: 5px;
+		    top: 5px;
+			background: #ff4747;
+		}
+	}
+	.nav-space {
+		width: 100%;
+		height: 40px;
+		opacity: 0;
+	}
+}
+
+@media screen and (min-width: 769px) {
+	.bt-nav {
+		display: none;
+		opacity: 0;
+	}
+}

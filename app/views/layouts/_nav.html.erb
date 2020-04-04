@@ -1,0 +1,256 @@
+<section>
+  <!-- left side start-->
+  <div class="left-side sticky-left-side">
+
+    <!--logo and iconic logo start-->
+    <div class="logo">
+      <a href="/manage"><img src="/assets/manage/logo.png" alt=""></a>
+    </div>
+
+    <div class="logo-icon text-center">
+      <a href="/manage"><img src="/assets/manage/logo_icon.png" alt=""></a>
+    </div>
+    <!--logo and iconic logo end-->
+
+    <div class="left-side-inner">
+
+      <!-- visible to small devices only -->
+      <div class="visible-xs hidden-sm hidden-md hidden-lg">
+        <div class="media logged-user admin">
+          <%= image_tag @admin.avatar_url, class: "media-object admin-avatar" %>
+          <div class="nav-u-info">
+            <h5>
+              <a href="/profile"><%= @admin.number %></a>
+            </h5>
+            <span><%= translate_role @admin.role %></span>
+          </div>
+        </div>
+
+        <ul class="nav nav-pills nav-stacked custom-nav">
+          <li>
+            <%= link_to profile_path do %>
+            <i class="fa fa-user"></i>
+            <span>个人中心</span>
+          <% end %>
+        </li>
+        <!-- <li> <a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a> </li> -->
+        <li>
+          <%= link_to logout_path, method: :post do %>
+          <i class="fa fa-sign-out"></i>
+          <span>退出</span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+
+  <!--sidebar nav start-->
+  <ul class="nav nav-pills nav-stacked custom-nav">
+    <li class='<%= 'active' if params[:controller] == 'main' %>'>
+      <a href="/manage">
+        <i class="fa fa-home"></i>
+        <span>后台首页</span>
+      </a>
+    </li>
+
+    <li class="menu-list <%= check_cur_ctrl ['group_activities', 'rec_activities', 'quick_navs'] %>">
+      <a href="">
+        <i class="glyphicon glyphicon-equalizer"></i>
+        <span>前台设置</span>
+      </a>
+      <ul class="sub-menu-list">
+        <li>
+          <a href="/group_activities">拼团活动</a>
+        </li>
+        <li>
+          <a href="/rec_activities">精品推荐</a>
+        </li>
+        <li>
+          <a href="/quick_navs">导航菜单</a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="menu-list <%= check_cur_ctrl ['products', 'product_cates', 'product_companies'] %>">
+      <a href="">
+        <i class="fa fa-laptop"></i>
+        <span>商品管理</span>
+      </a>
+      <ul class="sub-menu-list">
+        <li>
+          <a href="/products">全部商品</a>
+        </li>
+        <li>
+          <a href="/products/new">新建商品</a>
+        </li>
+        <li>
+          <a href="/product_cates">商品分类</a>
+        </li>
+        <li>
+          <a href="/products/deleted">已下架商品</a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="menu-list <%= check_cur_ctrl ['orders', 'order_refund_records'] %>">
+      <a href="">
+        <i class="glyphicon glyphicon-shopping-cart"></i>
+        <span>订单管理</span>
+      </a>
+      <ul class="sub-menu-list">
+        <li>
+          <a href="/orders">全部订单</a>
+        </li>
+        <li>
+          <a href="/orders/state/completed?states[]=completed">已完成订单</a>
+        </li>
+        <li>
+          <a href="/order_refund_records">退款申请</a>
+        </li>
+        <li>
+          <a href="/order_refund_records?states[]=refunded&cdts=false">已退款</a>
+        </li>
+      </ul>
+    </li>
+    <li class="menu-list <%= check_cur_ctrl ['coupons'] %>">
+      <a href="">
+        <i class="fa fa-ticket"></i>
+        <span>优惠券管理</span>
+      </a>
+      <ul class="sub-menu-list">
+        <li>
+          <a href="/coupons">所有优惠券</a>
+        </li>
+        <li>
+          <a href="/coupons/new">添加优惠券</a>
+        </li>
+      </ul>
+    </li>
+    <li class="menu-list <%= check_cur_ctrl ['histories', 'mat_histories'] %>">
+      <a href="">
+        <i class="fa fa-clock-o"></i>
+        <span>浏览记录</span>
+      </a>
+      <ul class="sub-menu-list">
+        <li>
+          <a href="/histories">商品记录</a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="menu-list <%= check_cur_ctrl 'users' %>">
+      <a href="">
+        <i class="fa fa-user"></i>
+        <span>用户管理</span>
+      </a>
+      <ul class="sub-menu-list">
+        <li>
+          <a href="/users">全部用户</a>
+        </li>
+      </ul>
+    </li>
+    <li class="menu-list <%= check_cur_ctrl ['admins', 'carousels', 'schools'] %>">
+      <a href="">
+        <i class="fa fa-cog"></i>
+        <span>系统设置</span>
+      </a>
+      <ul class="sub-menu-list">
+        <% if @admin.super? %>
+          <li>
+            <a href="/admins">管理员设置</a>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+  </ul>
+  <!--sidebar nav end-->
+
+</div>
+</div>
+</section>
+
+<!-- left side end-->
+
+<!-- main content start-->
+<div class="main-content">
+
+<!-- header section start-->
+<div class="header-section">
+
+  <!--toggle button start-->
+  <a class="toggle-btn">
+    <i class="fa fa-bars"></i>
+  </a>
+  <!--toggle button end-->
+
+  <!--search start-->
+  <!-- <form class="searchform" action="/" method="post"> <input type="text" class="form-control" name="keyword" placeholder="Search here..." /> </form> -->
+  <!--search end-->
+
+  <!--notification menu start -->
+  <div class="menu-right">
+    <ul class="notification-menu">
+      <li>
+        <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+          <i class="fa fa-envelope-o"></i>
+          <span class="badge"></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-head pull-right">
+          <h5 class="title">站内消息</h5>
+          <ul class="dropdown-list normal-list">
+            <li>
+              <a href="">
+                <span class="thumb">暂无</span>
+                <!-- <span class="desc"> <span class="name">暂无</span> <span class="msg">Lorem ipsum dolor sit amet...</span> </span> -->
+              </a>
+            </li>
+            <!-- <li class="new"><a href="">所有消息</a></li> -->
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+          <i class="fa fa-bell-o"></i>
+          <span class="badge"></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-head pull-right">
+          <h5 class="title">系统公告</h5>
+          <ul class="dropdown-list normal-list">
+            <li class="new">
+              <a href="">
+                <!-- <span class="label label-danger"><i class="fa fa-bolt"></i></span> -->
+                <span class="name">暂无
+                </span>
+                <!-- <em class="small">34 mins</em> -->
+              </a>
+            </li>
+            <!-- <li class="new"><a href="">所有公告</a></li> -->
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="/profile" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          <%= image_tag @admin.avatar_url, class: "admin-avatar" %>
+          <%= @admin.number %>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+          <li>
+            <%= link_to profile_path do %>
+            <i class="fa fa-user"></i>
+            <span>个人中心</span>
+          <% end %>
+        </li>
+        <!-- <li> <a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a> </li> -->
+        <li>
+          <%= link_to logout_path, method: :post do %>
+          <i class="fa fa-sign-out"></i>
+          <span>退出</span>
+        <% end %>
+      </li>
+    </ul>
+  </li>
+</ul>
+</div>
+<!--notification menu end -->
+</div>
+<!-- header section end-->

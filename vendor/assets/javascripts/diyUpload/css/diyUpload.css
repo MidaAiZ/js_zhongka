@@ -1,0 +1,241 @@
+@charset "utf-8";
+/* CSS Document*/
+.parentFileBox {
+	width:auto;
+	height:auto;
+	overflow:hidden;
+	position:relative;
+}
+.parentFileBox>.fileBoxUl {
+	position:relative;
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	padding: 10px 10px 0;
+}
+.parentFileBox>.fileBoxUl>li {
+	float:left;
+	/*border-radius:5px;*/
+	margin-left:0.5%;
+	margin-right:0.5%;
+	position:relative;
+	height: 0;
+	margin-top: 6px;
+	width: 32.333333333%;
+	overflow: hidden;
+	padding-bottom: 33%;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+	cursor: pointer;
+}
+
+.parentFileBox>.fileBoxUl>li.upload-btn * {
+	padding-bottom: 98%;
+}
+
+.parentFileBox>.fileBoxUl>li>.viewThumb {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	overflow:hidden;
+}
+.parentFileBox>.fileBoxUl>li>.viewThumb img {
+	width:100%;
+	min-height:100%;
+}
+.parentFileBox>.fileBoxUl>li>.diyCancel,
+.parentFileBox>.fileBoxUl>li>.diyDel,
+.parentFileBox>.fileBoxUl>li>.diySuccess {
+	position:absolute;
+	width:20px;
+	height:20px;
+	top:2px;
+	right:2px;
+	cursor:pointer;
+}
+
+.parentFileBox>.fileBoxUl>li>.diyCancel,
+.parentFileBox>.fileBoxUl>li>.diyDel
+ {
+	font-size: 20px;
+	color: rgba(255, 0, 0, 0.8);
+	z-index: 10;
+	/*background:url(../images/x_alt.png) no-repeat;*/
+}
+
+.parentFileBox>.fileBoxUl>li>.diySuccess {
+	/*background:url(../images/check_alt.png) no-repeat;*/
+	color: rgba(10, 210, 130, 0.8);
+	display:none;
+}
+.parentFileBox>.fileBoxUl>li>.diyFileName {
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	width:100%;
+	height:20px;
+	line-height:20px;
+	text-align:center;
+	color:#fff;
+	font-size:12px;
+	display:none;
+	background:url(../images/bgblack.png);
+}
+.parentFileBox>.fileBoxUl>li>.diyBar {
+	top:0;
+	left:0;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	line-height:100%;
+	background:url(../images/bgblack.png);
+	display:none;
+}
+.parentFileBox>.fileBoxUl>li>.diyBar>.diyProgressText {
+	font-size:14px;
+	text-align:center;
+	color:#FFF;
+	position:absolute;
+	left:0;
+	top:42%;
+	line-height: 24px;
+	width:100%;
+	z-index:99;
+}
+.parentFileBox>.fileBoxUl>li>.diyBar>.diyProgress {
+	position:absolute;
+	left:0;
+	top:42%;
+	height:24px;
+	width:100%;
+	background-color:#09F;
+	filter:alpha(opacity=70);
+	-moz-opacity:0.7;
+	opacity:0.7;
+	z-index:97;
+}
+.parentFileBox>.diyButton {
+	width:100%;
+	margin-top:5px;
+	margin-bottom:5px;
+	height:20px;
+	line-height:20px;
+	text-align:center;
+}
+.parentFileBox>.diyButton>a {
+	padding:5px 10px 5px 10px;
+	background-color:#09C;
+	color:#FFF;
+	font-size:12px;
+	text-decoration:none;
+	/*border-radius:3px;*/
+}
+.parentFileBox>.diyButton>a:hover {
+	background-color:#0CC;
+	color:#F30;
+}
+
+.parentFileBox>.fileBoxUl>li:not(.upload-btn):hover {
+	opacity: 0.9;
+}
+
+.parentFileBox>.fileBoxUl>li.upload-btn:hover {
+	/*-moz-box-shadow: 3px 3px 4px #FF0;
+	-webkit-box-shadow: 3px 3px 4px #FF0;
+	box-shadow: 3px 3px 4px #FF0;*/
+	background: rgba(0, 0, 0, 0.02);
+}
+.parentFileBox>.fileBoxUl>.diyUploadHover:hover .diyCancel {
+	display:block;
+}
+.parentFileBox>.fileBoxUl>li:hover .diyFileName {
+	display:block;
+}
+.avi_diy_bg,.txt_diy_bg,.doc_diy_bg,.zip_diy_bg,.csv_diy_bg,.xls_diy_bg,.mp3_diy_bg,.pdf_diy_bg,.rar_diy_bg {
+	background-position:center;
+	background-repeat:no-repeat;
+}
+.avi_diy_bg {
+	background-image:url(../images/filebg/avi.png);
+}
+.txt_diy_bg {
+	background-image:url(../images/filebg/txt.png);
+}
+.doc_diy_bg {
+	background-image:url(../images/filebg/doc.png);
+}
+.zip_diy_bg {
+	background-image:url(../images/filebg/zip.png);
+}
+.csv_diy_bg {
+	background-image:url(../images/filebg/csv.png);
+}
+.xls_diy_bg {
+	background-image:url(../images/filebg/xls.png);
+}
+.mp3_diy_bg {
+	background-image:url(../images/filebg/mp3.png);
+}
+.pdf_diy_bg {
+	background-image:url(../images/filebg/pdf.png);
+}
+.rar_diy_bg {
+	background-image:url(../images/filebg/rar.png);
+}
+
+@media screen and (min-width: 1200px) {
+	.parentFileBox>.fileBoxUl>li {
+		width: 19%;
+		margin-left:0.5%;
+		margin-right:0.5%;
+		overflow: hidden;
+		padding-bottom: 19%;
+	}
+	.parentFileBox>.fileBoxUl>li.upload-btn * {
+		padding-bottom: 98%;
+	}
+	.webuploader-pick {
+		padding: 30px;
+	}
+}
+
+@media screen and (min-width: 1500px) {
+	.webuploader-pick {
+		padding: 50px;
+	}
+}
+
+@media screen and (max-width: 1199px) {
+	.parentFileBox>.fileBoxUl>li {
+		width: 24%;
+		margin-left:0.5%;
+		margin-right:0.5%;
+		overflow: hidden;
+		padding-bottom: 24%;
+	}
+	.parentFileBox>.fileBoxUl>li.upload-btn * {
+		padding-bottom: 96%;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.parentFileBox>.fileBoxUl>li {
+		width: 32%;
+		margin-left:0.6666%;
+		margin-right:0.6666%;
+		overflow: hidden;
+		padding-bottom: 32%;
+	}
+	.parentFileBox>.fileBoxUl>li.upload-btn * {
+		padding-bottom: 97%;
+	}
+}
+
+@media screen and (max-width: 338px) {
+	.webuploader-pick {
+		padding: 15px;
+	}
+}

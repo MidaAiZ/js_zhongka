@@ -1,0 +1,88 @@
+//=require "cdtSelector/cdt-select"
+
+.cdts-panel {
+    .panel-heading.c {
+        border-bottom: 0px;
+    }
+    .tools a {
+        padding: 6px;
+    }
+    ul.option {
+        display: inline-block;
+        float: left;
+        width: auto;
+        padding-left: 0px;
+    }
+    li.opt-input {
+        float: right;
+        border-left: 0;
+    }
+    ul.directory-list {
+        // overflow-x: auto;
+        // display: inline-block;
+    }
+}
+
+ul.cdts {
+    padding-left: 0px;
+    padding-top: 10px;
+    > li {
+        list-style: none;
+        margin-bottom: 5px;
+        display: inline-block;;
+        width: 100%;
+        &.inline {
+          display: inline-block;
+          width: auto;
+        }
+        li {
+            width: auto;
+            min-width: 25px;
+            &:empty {
+              min-width: 0;
+              margin: 0;
+              padding: 0;
+            }
+            a {
+                padding: 3px;
+                font-size: 11px;
+                &:hover {
+                    color: #65CEA7;
+                    background: white;
+                }
+            }
+            &.active a {
+                color: white;
+                background: #65CEA7;
+            }
+        }
+    }
+    .opt-tip {
+      font-size: 12px;
+    }
+    input {
+      min-width: 150px;
+    }
+    .con-item {
+        background: white;
+        margin-right: 5px;
+        padding: 3px;
+        color: #65CEA7;
+        font-size: 12px;
+        font-weight: 600;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    ul.cdts {
+        margin-top: 15px;
+        padding-left: 15px;
+        padding-top: 0px;
+        > li {
+            margin-bottom: 0px;
+        }
+    }
+    .wrapper .directory-info-row {
+        margin-top: 0px;
+    }
+}
