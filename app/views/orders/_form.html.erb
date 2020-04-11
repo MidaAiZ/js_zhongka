@@ -1,0 +1,297 @@
+<% if notice %>
+  <h3><%= notice %></h3>
+<% end %>
+<div class="wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <%= form_with(model: order, local: true, html: { id: 'order-form', 'data-id' => @order.id, valid: false }) do |f| %>
+      <div id="error">
+        <% if @order.errors.any? %>
+          <div id="error_explanation">
+            <h3>存在<%= @order.errors.count %>个错误信息</h3>
+            <ul>
+              <% @order.errors.full_messages.each do |message| %>
+                <li class="form-error"><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+      <section class='panel'>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12">
+            <div class="panel panel-split">
+              <div class="panel-heading">
+                基本信息
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label for="order_spec">司机</label>
+                      <input id='order_driver_id' name='order[driver_id]' class="form-control" placeholder="请输入司机" value="<%= @order.driver_id %>">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="order_price">订单价格（元）</label>
+                      <input type="text" id='order_price' name='order[price]' class="form-control" placeholder="请输入订单价格" value="<%= @order.price %>">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label for="order_spec">车牌</label>
+                      <input id='order_driver_id' name='order[car_number]' class="form-control" placeholder="请输入车牌" value="<%= @order.car_number %>">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="order_price">挂车</label>
+                      <input type="text" id='order_car_body_id' name='order[car_body_id]' class="form-control" placeholder="请输入挂车号" value="<%= @order.car_body_id %>">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label for="order_spec">货物</label>
+                      <input type="text" id='order_goods' name='order[goods]' class="form-control" placeholder="请输入货物" value="<%= @order.goods %>">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="order_price">重量</label>
+                      <input type="text" id='order_weight' name='order[weight]' class="form-control" placeholder="请输入重量" value="<%= @order.weight %>">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label for="order_spec">发货地</label>
+                      <input type="text" id='order_origin' name='order[origin]' class="form-control" placeholder="请输入发货地" value="<%= @order.origin %>">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="order_price">目的地</label>
+                      <input type="text" id='order_destination' name='order[destination]' class="form-control" placeholder="请输入目的地" value="<%= @order.destination %>">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label for="order_spec">发车时间</label>
+                      <input type="text" id='order_start_time' name='order[start_time]' class="form-control" placeholder="请输入发车时间" value="<%= @order.start_time %>">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="order_price">达到时间</label>
+                      <input type="text" id='order_destination' name='order[end_time]' class="form-control" placeholder="请输入到达时间" value="<%= @order.end_time %>">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label for="order_spec">油耗</label>
+                      <input type="text" id='order_oil_consumption' name='order[oil_consumption]' class="form-control" placeholder="请输入油耗（升）" value="<%= @order.oil_consumption %>">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="order_price">油费</label>
+                      <input type="text" id='order_oil_fee' name='order[oil_fee]' class="form-control" placeholder="请输入油费" value="<%= @order.oil_fee %>">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <label for="order_spec">运输距离</label>
+                        <input type="text" id='order_toll_gate' name='order[distance]' class="form-control" placeholder="请输入运输距离（公里km）" value="<%= @order.distance %>">
+                      </div>
+                      <div class="col-sm-6">
+                        <label for="order_road_toll">过路费</label>
+                        <input type="text" id='order_road_toll' name='order[road_toll]' class="form-control" placeholder="请输入过路费" value="<%= @order.road_toll %>">
+                      </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label for="order_pay_time">支付时间</label>
+                      <input type="text" id='order_pay_time' name='order[pay_time]' class="form-control" placeholder="请输入支付时间" value="<%= @order.pay_time %>">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="order_pay_type">支付方式</label>
+                      <input type="text" id='order_pay_type' name='order[pay_type]' class="form-control" placeholder="请输入支付方式" value="<%= @order.pay_type %>">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label for="order_sale_name">销售员</label>
+                      <input type="text" id='order_sale_name' name='order[sale_name]' class="form-control" placeholder="请输入销售员" value="<%= @order.sale_name %>">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="order_pay_type">订单备注</label>
+                      <input type="text" id='order_pay_type' name='order[remark]' class="form-control" placeholder="请输入订单备注" value="<%= @order.remark %>">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="actions">
+        <button id='order-submit' class="btn btn-primary btn-wide" href="JavaScript:void(0)">提交</button>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+<%= stylesheet_link_tag 'cdtSelector/cdt-select-theme' %>
+<%= javascript_include_tag 'cdtSelector/cdtSelect' %>
+<script>
+$('body').on("keydown", "input", function (event) {
+  event.stopPropagation();
+  var code;
+  if (event) {
+    event = window.event; //针对ie浏览器
+  }
+  code = event.keyCode;
+  if (code == 13) {
+    $(this).blur();
+    event.preventDefault();
+  }
+});
+
+$('#order-submit').on('click', function () {
+  var inputs = $("#order-form").find('input, [name], [data-name]');
+  // inputs.each(function (index, item) {
+  //   var val = $(item).val();
+  //   if (!val && val !== 0 && val !== false) {
+  //     $(item).attr('data-name', $(item).attr('name'));
+  //     $(item).removeAttr('name');
+  //   } else if (!$(item).attr('name')) {
+  //     $(item).attr('name', $(item).attr('data-name'));
+  //   }
+  // });
+  var spec = $("#order_spec").val();
+  $("#order_spec").val(spec.trim().split(" ").join("|"));
+  // showLoading();
+  $('#order-form').submit();
+  return false;
+});
+
+
+$(function () {
+  $('.cdt-select').on('click', '.cdt-info .del', function() {
+    $(this).parents('.cdt-select').siblings('[value="'+ $(this).parent().data('id') +'"]').removeAttr('value');
+  });
+  $('.cdt-select').each(function () {
+    var $this = $(this);
+    var datas = $this.data("json");
+    var hots = [];
+    var key = $this.data('key');
+    if (key && key !== 'name') {
+      for (var i in datas) {
+        datas[i].name = datas[i][key];
+      }
+    }
+    for (var i in datas) {
+      hots.push(datas[i].name);
+    }
+    var selector = $this.cdtSelect({
+      dataJson: datas,
+      multiSelect: false,
+      search: true,
+      hotcdt: hots,
+      onCallerAfter: function (target, values) {
+        var vals = $this.find(".cdt-info span").map(function (i, v) {
+          return $(v).data('id')
+        });
+        var $inputs = $this.siblings("input");
+        vals.each(function (i, v) {
+          if ($inputs[i])
+            $($inputs[i]).val(v);
+          else {
+            var $input = $($inputs[0]).clone();
+            $input.attr('type', 'hidden');
+            $input.val(v);
+            $this.before($input);
+          }
+        })
+        $inputs.each(function (i, v) {
+          if (i >= vals.length)
+            $(v).remove();
+          }
+        )
+      },
+      onAjaxSearch: function (value, target) {
+        var result = [];
+        var keywords = $(target).parents('.cdt-select').data('keywords');
+        if (!keywords)
+          keywords = 'name';
+        keys = keywords.split('|');
+        cdts = keys.map(function (k) {
+          return k + '=' + value;
+        }).join('&');
+        $.ajax({
+          url: $this.data("search-url") + "?" + cdts,
+          type: "GET",
+          async: false,
+          success: function (data) {
+            result = data.list || data;
+          },
+          error: function (err) {}
+        });
+        if (key) {
+          for (var i in result) {
+            result[i].name = result[i][key];
+          }
+        }
+        return result;
+      }
+    });
+    selector.setcdtVal($this.data("default").toString());
+    if ($this.hasClass('force-default')) { // FIX selector bug，当选项出现,分隔符时无法设置默认选中
+      selector.$selector.find('.cdt-input')
+                        .siblings('span').remove()
+                        .end()
+                        .before('<span data-id="'+ $this.data("default") +'">'+ $this.data("default") +'<i class="del"></i></span>');
+    }
+  })
+
+  $(".cdt-select.spec input").attr("placeholder", "请选择产品规格或输入关键字筛选");
+  $(".cdt-select.spec .cdt-tabs").hide();
+
+  $('.cdt-select[disabled] input').attr('disabled', true).attr('placeholder', '不可修改');
+
+  $('.cdt-select[disabled] input').on('input', function(e) {
+    e.preventDefault();
+    return false;
+  })
+  $('.cdt-select[disabled] *').on('click', function(e) {
+    e.preventDefault();
+    return false;
+  })
+})
+</script>
+
+
+<%= form_with(model: order, local: true) do |form| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

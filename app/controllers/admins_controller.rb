@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  before_action :check_super, except: [:profile, :update_avatar]
+  # before_action :check_super, except: [:profile, :update_avatar]
   before_action :set_admin, only: [:update, :destroy]
 
   # GET /admins

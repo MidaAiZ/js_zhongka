@@ -1,0 +1,118 @@
+<!-- page heading start-->
+<div class="page-heading">
+  <ul class="breadcrumb">
+    <li>
+      <a href="/orders">订单管理</a>
+    </li>
+    <li class="active">
+      <a href="">订单<%= @order.order_number %></a>
+    </li>
+    <li class="pull-right flex">
+    </li>
+  </ul>
+</div>
+<!-- page heading end-->
+
+<div class="wrapper @order-detail">
+  <div class="row">
+    <div class="col-md-12">
+      <% if notice %>
+        <h4 style="color: #ff6666"><%= notice %></h4>
+      <% end %>
+      <div class="panel">
+        <div class="panel-heading">
+          订单详情
+          <small>
+            <%= link_to '编辑', edit_order_path(@order), class: 'pull-right flex' %>
+          </small>
+        </div>
+        <div class="panel-body">
+
+          <ul class="p-info o-info">
+            <li>
+              <div class="title">订单编号</div>
+              <div class="desk"><%= @order.order_number %></div>
+            </li>
+            <li>
+              <div class="title">订单价格</div>
+              <div class="desk"><%= @order.price %>元</div>
+            </li>
+            <li>
+              <div class="title">司机</div>
+              <div class="desk"><%= @order.driver_id %></div>
+            </li>
+            <li>
+              <div class="title">车牌号</div>
+              <div class="desk"><%= @order.car_number %></div>
+            </li>
+            <li>
+              <div class="title">挂车</div>
+              <div class="desk"><%= @order.car_body_id %></div>
+            </li>
+            <li>
+              <div class="title">货物</div>
+              <div class="desk"><%= @order.goods %></div>
+            </li>
+            <li>
+              <div class="title">货重</div>
+              <div class="desk"><%= @order.weight %></div>
+            </li>
+            <li>
+              <div class="title">发车地</div>
+              <div class="desk"><%= @order.origin %></div>
+            </li>
+            <li>
+              <div class="title">目的地</div>
+              <div class="desk"><%= @order.destination %></div>
+            </li>
+            <li>
+              <div class="title">运输距离</div>
+              <div class="desk"><%= @order.distance %></div>
+            </li>
+            <li>
+              <div class="title">发车时间</div>
+              <div class="desk"><%= @order.start_time.try :strftime, '%Y-%m-%d %H:%M:%S' %></div>
+            </li>
+            <li>
+              <div class="title">送到时间</div>
+              <div class="desk"><%= @order.end_time.try :strftime, '%Y-%m-%d %H:%M:%S' %></div>
+            </li>
+            <li>
+              <div class="title">油耗</div>
+              <div class="desk"><%= @order.oil_consumption || 0 %>升</div>
+            </li>
+            <li>
+              <div class="title">油费</div>
+              <div class="desk"><%= @order.toll_gate || 0 %>元</div>
+            </li>
+            <li>
+              <div class="title">过路费</div>
+              <div class="desk"><%= @order.road_toll || 0 %>元</div>
+            </li>
+            <li>
+              <div class="title">订单状态</div>
+              <div class="desk"><%= @order.state_text %></div>
+            </li>
+            <li>
+              <div class="title">销售员</div>
+              <div class="desk"><%= @order.sale_name %></div>
+            </li>
+            <li>
+              <div class="title">支付方式</div>
+              <div class="desk"><%= @order.pay_type %></div>
+            </li>
+            <li>
+              <div class="title">支付时间</div>
+              <div class="desk"><%= @order.pay_time %></div>
+            </li>
+            <li>
+              <div class="title">订单备注</div>
+              <div class="desk"><%= @order.remark %></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= link_to '返回', @orders_path %>
+</div>

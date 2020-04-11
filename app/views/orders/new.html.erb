@@ -1,0 +1,12 @@
+<div class="page-heading">
+    <h3>
+        创建订单
+    </h3>
+    <ul class="breadcrumb">
+        <li>
+            <%= link_to '全部订单', orders_path %>
+        </li>
+        <li class="active"> 新建 </li>
+    </ul>
+</div>
+<%= render 'form', order: @order %>

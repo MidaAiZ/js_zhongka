@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order_number: MyString
+  price: 1.5
+  driver_id: MyString
+  car_number: MyString
+  car_body_id: MyString
+  goods: MyString
+  weight: 1.5
+  origin: MyString
+  destination: MyString
+  distance: MyString
+  start_time: MyString
+  end_time: MyString
+  oil_consumption: 1.5
+  oil_fee: 1.5
+  toll_gate: 1
+  road_toll: 1.5
+  state: 1
+  customer_id: MyString
+  sale_name: MyString
+
+two:
+  order_number: MyString
+  price: 1.5
+  driver_id: MyString
+  car_number: MyString
+  car_body_id: MyString
+  goods: MyString
+  weight: 1.5
+  origin: MyString
+  destination: MyString
+  distance: MyString
+  start_time: MyString
+  end_time: MyString
+  oil_consumption: 1.5
+  oil_fee: 1.5
+  toll_gate: 1
+  road_toll: 1.5
+  state: 1
+  customer_id: MyString
+  sale_name: MyString

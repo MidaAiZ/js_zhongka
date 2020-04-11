@@ -18,7 +18,6 @@ SET default_tablespace = '';
 CREATE TABLE public.admins (
     id bigint NOT NULL,
     number character varying NOT NULL,
-    password character varying NOT NULL,
     password_digest character varying NOT NULL,
     email character varying DEFAULT ''::character varying NOT NULL,
     tel character varying DEFAULT ''::character varying NOT NULL,
@@ -63,6 +62,60 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: orders; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.orders (
+    id bigint NOT NULL,
+    order_number character varying,
+    price double precision,
+    driver_id character varying,
+    car_number character varying,
+    car_body_id integer,
+    goods character varying,
+    weight double precision,
+    origin character varying,
+    destination character varying,
+    distance character varying,
+    start_time timestamp without time zone,
+    end_time timestamp without time zone,
+    oil_consumption double precision,
+    oil_fee double precision,
+    toll_gate integer,
+    road_toll double precision,
+    state integer,
+    last_state integer,
+    customer_id integer,
+    sale_name character varying,
+    pay_type character varying,
+    pay_time timestamp without time zone,
+    remark character varying,
+    is_deleted boolean DEFAULT false NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.orders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.orders_id_seq OWNED BY public.orders.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -76,6 +129,13 @@ CREATE TABLE public.schema_migrations (
 --
 
 ALTER TABLE ONLY public.admins ALTER COLUMN id SET DEFAULT nextval('public.admins_id_seq'::regclass);
+
+
+--
+-- Name: orders id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.orders ALTER COLUMN id SET DEFAULT nextval('public.orders_id_seq'::regclass);
 
 
 --
@@ -95,6 +155,14 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 
 --
+-- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -109,6 +177,7 @@ ALTER TABLE ONLY public.schema_migrations
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20200404075635');
+('20200404075635'),
+('20200404183910');
 
 

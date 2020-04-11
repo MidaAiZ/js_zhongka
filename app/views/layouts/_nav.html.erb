@@ -4,11 +4,11 @@
 
     <!--logo and iconic logo start-->
     <div class="logo">
-      <a href="/manage"><img src="/assets/manage/logo.png" alt=""></a>
+      <a href="/"><img src="/assets/manage/logo.png" alt=""></a>
     </div>
 
     <div class="logo-icon text-center">
-      <a href="/manage"><img src="/assets/manage/logo_icon.png" alt=""></a>
+      <a href="/"><img src="/assets/manage/logo_icon.png" alt=""></a>
     </div>
     <!--logo and iconic logo end-->
 
@@ -46,9 +46,9 @@
   <!--sidebar nav start-->
   <ul class="nav nav-pills nav-stacked custom-nav">
     <li class='<%= 'active' if params[:controller] == 'main' %>'>
-      <a href="/manage">
+      <a href="/">
         <i class="fa fa-home"></i>
-        <span>后台首页</span>
+        <span>系统首页</span>
       </a>
     </li>
 
@@ -102,9 +102,6 @@
         </li>
         <li>
           <a href="/orders/state/completed?states[]=completed">已完成订单</a>
-        </li>
-        <li>
-          <a href="/order_refund_records">退款申请</a>
         </li>
         <li>
           <a href="/order_refund_records?states[]=refunded&cdts=false">已退款</a>

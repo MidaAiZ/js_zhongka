@@ -1,0 +1,145 @@
+<div class="cdts-panel">
+	<header class="panel-heading c">
+		<small>条件筛选</small>
+		<span class="tools pull-right">
+			<a class="fa fa-chevron-down" href="javascript:;" role='show-cdts'></a>
+		 </span>
+	</header>
+
+	<ul class='cdts' id="cdts" style="display: none">
+		<% if params[:action].to_sym == :index %>
+			<li>
+				<div class="options"  data-multi='true'>
+					<ul class="directory-list">
+						<li class='con-item' id='state' data-name="states[]">状态</li>
+						<% Order.states.keys.each do |k| %>
+							<li><a href="JavaScript: void(0)" data-value="<%= k %>" data-role='opt'><%= Order.STATE_TEXT[k.to_sym] %></a></li>
+						<% end %>
+						<li><a href="JavaScript: void(0)" data-role='opt'>不限</a></li>
+					</ul>
+				</div>
+			</li>
+		<% end %>
+		<li class="inline">
+				<div class="options" data-multi='true'>
+				<ul class="directory-list">
+					<li class='con-item' id='create_begin' data-name="created_after">下单日期</li>
+					<span class="opt-tip">开始</span>
+					<li>
+						<a href="JavaScript: void(0)" data-value data-role='opt'>
+							<input type="text" class="date input" autocomplete="off">
+						</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<li class="inline">
+			<div class="options" data-multi='true'>
+				<ul class="directory-list">
+					<li class='con-item' id='create_end' data-name="created_before"></li>
+					<span class="opt-tip">截止</span>
+					<li>
+						<a href="JavaScript: void(0)" data-value data-role='opt'>
+							<input type="text" class="date input" role='order-end-time' autocomplete="off">
+						</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+
+		<li class="inline">
+				<div class="options" data-multi='true'>
+				<ul class="directory-list">
+					<li class='con-item' id='pay_begin' data-name="pay_after">付款日期</li>
+					<span class="opt-tip">开始</span>
+					<li>
+						<a href="JavaScript: void(0)" data-value data-role='opt'>
+							<input type="text" class="date input" autocomplete="off">
+						</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<li class="inline">
+			<div class="options" data-multi='true'>
+				<ul class="directory-list">
+					<li class='con-item' id='pay_end' data-name="pay_before"></li>
+					<span class="opt-tip">截止</span>
+					<li>
+						<a href="JavaScript: void(0)" data-value data-role='opt'>
+							<input type="text" class="date input" role='order-end-time' autocomplete="off">
+						</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<br>
+		<li class="inline">
+				<div class="options" data-multi='true'>
+				<ul class="directory-list">
+					<li class='con-item' id='shipping_begin' data-name="shipping_after">发货日期</li>
+					<span class="opt-tip">开始</span>
+					<li>
+						<a href="JavaScript: void(0)" data-value data-role='opt'>
+							<input type="text" class="date input" autocomplete="off">
+						</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<li class="inline">
+			<div class="options" data-multi='true'>
+				<ul class="directory-list">
+					<li class='con-item' id='shipping_end' data-name="shipping_before"></li>
+					<span class="opt-tip">截止</span>
+					<li>
+						<a href="JavaScript: void(0)" data-value data-role='opt'>
+							<input type="text" class="date input" role='order-end-time' autocomplete="off">
+						</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<br>
+		<li class="inline">
+			<div class="options" data-multi='true'>
+				<ul class="directory-list">
+					<span></span>
+					<li class='con-item' id='price_floor' data-name="price_floor">价格区间</li>
+					<span class="opt-tip">大于等于</span>
+					<li>
+						<a href="JavaScript: void(0)" data-value data-role='opt'>
+							<input type="text" class="input" placeholder="请输入数字, 回车搜索">
+						</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<li class="inline">
+			<div class="options" data-multi='true'>
+				<ul class="directory-list">
+					<li class='con-item' id='price_ceil' data-name="price_ceil"></li>
+					<span class="opt-tip">小于等于</span>
+					<li>
+						<a href="JavaScript: void(0)" data-value data-role='opt'>
+							<input type="text" class="input" placeholder="请输入数字, 回车搜索">
+						</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<%= stylesheet_link_tag "cdtSelector/cdt-select" %>
+<%= javascript_include_tag "cdtSelector/cdtSelect" %>
+<script type="text/javascript">
+	// 处理特殊的截止时间 时间+1天
+	$('[role="order-end-time"]').on('change', function() {
+		if ($(this).val()) {
+			var d = new Date($(this).val());
+			d.setDate(d.getDate() + 1)
+			$(this).val([d.getFullYear(), d.getMonth() + 1, d.getDate()].join('-'));
+		}
+	})
+</script>
