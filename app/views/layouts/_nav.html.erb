@@ -52,7 +52,7 @@
       </a>
     </li>
 
-    <li class="menu-list <%= check_cur_ctrl ['group_activities', 'rec_activities', 'quick_navs'] %>">
+    <!-- <li class="menu-list <%#= check_cur_ctrl ['group_activities', 'rec_activities', 'quick_navs'] %>">
       <a href="">
         <i class="glyphicon glyphicon-equalizer"></i>
         <span>前台设置</span>
@@ -68,28 +68,7 @@
           <a href="/quick_navs">导航菜单</a>
         </li>
       </ul>
-    </li>
-
-    <li class="menu-list <%= check_cur_ctrl ['products', 'product_cates', 'product_companies'] %>">
-      <a href="">
-        <i class="fa fa-laptop"></i>
-        <span>商品管理</span>
-      </a>
-      <ul class="sub-menu-list">
-        <li>
-          <a href="/products">全部商品</a>
-        </li>
-        <li>
-          <a href="/products/new">新建商品</a>
-        </li>
-        <li>
-          <a href="/product_cates">商品分类</a>
-        </li>
-        <li>
-          <a href="/products/deleted">已下架商品</a>
-        </li>
-      </ul>
-    </li>
+    </li> -->
 
     <li class="menu-list <%= check_cur_ctrl ['orders', 'order_refund_records'] %>">
       <a href="">
@@ -108,54 +87,29 @@
         </li>
       </ul>
     </li>
-    <li class="menu-list <%= check_cur_ctrl ['coupons'] %>">
-      <a href="">
-        <i class="fa fa-ticket"></i>
-        <span>优惠券管理</span>
-      </a>
-      <ul class="sub-menu-list">
-        <li>
-          <a href="/coupons">所有优惠券</a>
-        </li>
-        <li>
-          <a href="/coupons/new">添加优惠券</a>
-        </li>
-      </ul>
-    </li>
-    <li class="menu-list <%= check_cur_ctrl ['histories', 'mat_histories'] %>">
-      <a href="">
-        <i class="fa fa-clock-o"></i>
-        <span>浏览记录</span>
-      </a>
-      <ul class="sub-menu-list">
-        <li>
-          <a href="/histories">商品记录</a>
-        </li>
-      </ul>
-    </li>
-
-    <li class="menu-list <%= check_cur_ctrl 'users' %>">
+    <li class="menu-list <%= check_cur_ctrl ['drivers', 'salers'] %>">
       <a href="">
         <i class="fa fa-user"></i>
         <span>用户管理</span>
       </a>
       <ul class="sub-menu-list">
         <li>
-          <a href="/users">全部用户</a>
+          <a href="/drivers">司机管理</a>
+        </li>
+        <li>
+          <a href="/sales">业务员管理</a>
         </li>
       </ul>
     </li>
-    <li class="menu-list <%= check_cur_ctrl ['admins', 'carousels', 'schools'] %>">
+    <li class="menu-list <%= check_cur_ctrl ['admins'] %>">
       <a href="">
         <i class="fa fa-cog"></i>
         <span>系统设置</span>
       </a>
       <ul class="sub-menu-list">
-        <% if @admin.super? %>
-          <li>
-            <a href="/admins">管理员设置</a>
-          </li>
-        <% end %>
+        <li>
+          <a href="/admins">管理员设置</a>
+        </li>
       </ul>
     </li>
   </ul>

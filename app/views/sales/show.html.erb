@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @sale.name %>
+</p>
+
+<p>
+  <strong>Tel:</strong>
+  <%= @sale.tel %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @sale.gender %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @sale.age %>
+</p>
+
+<p>
+  <strong>Join time:</strong>
+  <%= @sale.join_time %>
+</p>
+
+<p>
+  <strong>Info:</strong>
+  <%= @sale.info %>
+</p>
+
+<p>
+  <strong>Remark:</strong>
+  <%= @sale.remark %>
+</p>
+
+<%= link_to 'Edit', edit_sale_path(@sale) %> |
+<%= link_to 'Back', sales_path %>

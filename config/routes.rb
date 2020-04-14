@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :sales
+  resources :drivers
+  resources :car_bodies
+  resources :car_heads
   resources :orders
   get '' => 'main#index', as: :root
 

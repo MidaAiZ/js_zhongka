@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @car_body.body_id %>
+</p>
+
+<p>
+  <strong>Body type:</strong>
+  <%= @car_body.body_type %>
+</p>
+
+<p>
+  <strong>Brand:</strong>
+  <%= @car_body.brand %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @car_body.status %>
+</p>
+
+<%= link_to 'Edit', edit_car_body_path(@car_body) %> |
+<%= link_to 'Back', car_bodies_path %>

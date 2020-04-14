@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cur number:</strong>
+  <%= @car_head.car_number %>
+</p>
+
+<p>
+  <strong>Head type:</strong>
+  <%= @car_head.head_type %>
+</p>
+
+<p>
+  <strong>Brand:</strong>
+  <%= @car_head.brand %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @car_head.status %>
+</p>
+
+<%= link_to 'Edit', edit_car_head_path(@car_head) %> |
+<%= link_to 'Back', car_heads_path %>

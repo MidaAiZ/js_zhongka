@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  body_id: MyString
+  body_type: MyString
+  brand: MyString
+  status: 1
+
+two:
+  body_id: MyString
+  body_type: MyString
+  brand: MyString
+  status: 1

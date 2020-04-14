@@ -1,0 +1,37 @@
+<%= form_with(model: car_head, local: true) do |form| %>
+  <% if car_head.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(car_head.errors.count, "error") %> prohibited this car_head from being saved:</h2>
+
+      <ul>
+      <% car_head.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :car_number %>
+    <%= form.text_field :car_number, id: :car_head_car_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :head_type %>
+    <%= form.text_field :head_type, id: :car_head_head_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :brand %>
+    <%= form.text_field :brand, id: :car_head_brand %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.number_field :status, id: :car_head_status %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
