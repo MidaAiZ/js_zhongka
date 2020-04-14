@@ -29,11 +29,12 @@ var EditableTable = function() {
                                 <option value="男" ' + (aData[2] == '男' ? "selected" : "") + '>男</option>\
                                 <option value="女" ' + (aData[2] == '女' ? "selected" : "") + '>女</option>\
                               </select>';
-        jqTds[3].innerHTML = '<input type="text" class="form-control small" value="' + aData[3] + '">';
-        jqTds[4].innerHTML = '<input type="text" class="form-control small" value="' + aData[4] + '">';
+        jqTds[3].innerHTML = '<input type="text" class="input date form-control small" value="' + aData[3] + '" autocomplete="off">';
+        jqTds[4].innerHTML = '<input type="text" class="input date form-control small" value="' + aData[4] + '" autocomplete="off">';
         jqTds[6].innerHTML = '<a class="edit" href="">保存</a>';
         if (id) $(jqTds[6]).find("a.edit").attr("data-id", id);
         jqTds[7].innerHTML = '<a class="cancel" href="">取消</a>';
+        initDate();
       }
 
       function saveRow(oTable, nRow, id) {

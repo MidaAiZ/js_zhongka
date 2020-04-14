@@ -71,7 +71,7 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:price, :driver_id, :car_number, :car_body_id, :goods, :weight, :origin, :destination, :distance, :start_time, :end_time, :oil_consumption, :oil_fee, :toll_gate, :road_toll, :state, :customer_id, :sale_name, :pay_type, :pay_time, :remark)
+      params.require(:order).permit(:price, :driver_id, {driver_ids: []}, {sale_ids: []}, :car_number, :car_body_id, :goods, :weight, :origin, :destination, :distance, :start_time, :end_time, :oil_consumption, :oil_fee, :toll_gate, :road_toll, :state, :customer_id, :sale_name, :pay_type, :pay_time, :remark)
     end
 
     def filter_cons

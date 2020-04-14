@@ -141,7 +141,7 @@
     functionality.template = [
         '<div class="cdt-pavilion hide">',
         '<div class="cdt-tabs">',
-                '<a href="javascript:;" class="tab-a active" data-letter="HOT">热门搜索</a>',
+                '<a href="javascript:;" class="tab-a active" data-letter="HOT">搜索结果</a>',
             '</div>',
             '<div class="cdt-cont">',
                 '{cont}',

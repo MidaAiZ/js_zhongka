@@ -15,6 +15,7 @@
 //= require nicescroll
 //= require share/loading
 //= require share/tagsinput-init
+//= require share/datepicker
 
 (function() {
     "use strict";

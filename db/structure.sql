@@ -169,6 +169,16 @@ ALTER SEQUENCE public.drivers_id_seq OWNED BY public.drivers.id;
 
 
 --
+-- Name: drivers_orders; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.drivers_orders (
+    driver_id bigint,
+    order_id bigint
+);
+
+
+--
 -- Name: orders; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -220,6 +230,16 @@ CREATE SEQUENCE public.orders_id_seq
 --
 
 ALTER SEQUENCE public.orders_id_seq OWNED BY public.orders.id;
+
+
+--
+-- Name: orders_sales; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.orders_sales (
+    sale_id bigint,
+    order_id bigint
+);
 
 
 --
@@ -375,6 +395,34 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: idx_drivers_orders_on_oid_did; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX idx_drivers_orders_on_oid_did ON public.drivers_orders USING btree (order_id, driver_id);
+
+
+--
+-- Name: idx_orders_sales_on_oid_sid; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX idx_orders_sales_on_oid_sid ON public.orders_sales USING btree (order_id, sale_id);
+
+
+--
+-- Name: index_drivers_orders_on_driver_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_drivers_orders_on_driver_id ON public.drivers_orders USING btree (driver_id);
+
+
+--
+-- Name: index_orders_sales_on_sale_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_orders_sales_on_sale_id ON public.orders_sales USING btree (sale_id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -386,6 +434,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200411142355'),
 ('20200411150458'),
 ('20200414155107'),
-('20200414160759');
+('20200414160759'),
+('20200414180807'),
+('20200414181241');
 
 

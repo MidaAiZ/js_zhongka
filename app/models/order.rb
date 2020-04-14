@@ -20,6 +20,9 @@ class Order < ApplicationRecord
   # 0=>待付款, 1=>待发货, 2=>待签收, 3=>待评论, 4=>已完成, 5=>退款中, 6=>已退款, 7=>已取消, 8=>已删除
   enum state: { onpaying: 0, ondelivering: 1, onreceiving: 2, oncommenting: 3, completed: 4, onrefunding: 5, refunded: 6, canceled: 7 }
 
+  has_and_belongs_to_many :drivers
+  has_and_belongs_to_many :sales
+
   def self.new(attrs = {}, &blk)
     order = super &blk
     order.attributes = attrs
