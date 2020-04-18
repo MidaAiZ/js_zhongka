@@ -52,23 +52,20 @@
       </a>
     </li>
 
-    <!-- <li class="menu-list <%#= check_cur_ctrl ['group_activities', 'rec_activities', 'quick_navs'] %>">
+    <li class="menu-list <%= check_cur_ctrl ['car_heads', 'car_bodies'] %>">
       <a href="">
-        <i class="glyphicon glyphicon-equalizer"></i>
-        <span>前台设置</span>
+        <i class="glyphicon glyphicon-screenshot"></i>
+        <span>车辆管理</span>
       </a>
       <ul class="sub-menu-list">
         <li>
-          <a href="/group_activities">拼团活动</a>
+          <a href="/car_heads">车头设置</a>
         </li>
         <li>
-          <a href="/rec_activities">精品推荐</a>
-        </li>
-        <li>
-          <a href="/quick_navs">导航菜单</a>
+          <a href="/car_bodies">挂车设置</a>
         </li>
       </ul>
-    </li> -->
+    </li>
 
     <li class="menu-list <%= check_cur_ctrl ['orders', 'order_refund_records'] %>">
       <a href="">
@@ -80,10 +77,10 @@
           <a href="/orders">全部订单</a>
         </li>
         <li>
-          <a href="/orders/state/completed?states[]=completed">已完成订单</a>
+          <a href="/orders?state_=onprogress&states[]=onpaying1&states[]=onloading&states[]=ondelivering&states[]=arrived&states[]=onpaying2">进行中的订单</a>
         </li>
         <li>
-          <a href="/order_refund_records?states[]=refunded&cdts=false">已退款</a>
+          <a href="/orders?states[]=completed">已完成订单</a>
         </li>
       </ul>
     </li>

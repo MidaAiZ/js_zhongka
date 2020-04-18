@@ -6,9 +6,9 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-   nonpaged_orders = Order.filter(@cons)
-   @orders = nonpaged_orders.page(@page).per(@count)
-  end
+	  nonpaged_orders = Order.filter(@cons).includes(:drivers, :sales, :car_head, :car_body)
+    @orders = nonpaged_orders.page(@page).per(@count)
+	end
 
   # GET /orders/1
   # GET /orders/1.json
@@ -71,12 +71,12 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:price, :driver_id, {driver_ids: []}, {sale_ids: []}, :car_number, :car_body_id, :goods, :weight, :origin, :destination, :distance, :start_time, :end_time, :oil_consumption, :oil_fee, :toll_gate, :road_toll, :state, :customer_id, :sale_name, :pay_type, :pay_time, :remark)
+      params.require(:order).permit(:price, :driver_id, {driver_ids: []}, {sale_ids: []}, :car_number, :car_body_id, :customer_name, :customer_tel, :goods, :weight, :origin, :destination, :distance, :start_time, :end_time, :oil_consumption, :oil_fee, :toll_gate, :road_toll, :state, :customer_id, :sale_name, :total_fee, :pay1_type, :pay1_time, :pay1_amount, :pay2_type, :pay2_time, :pay2_amount, :via_stations, :remark)
     end
 
     def filter_cons
 		@count = params[:count] || 20
 		@page = params[:page] || 1
-		@cons = params.slice(:keywords, :states, :pay_types, :number, :created_before, :created_after, :pay_before, :pay_after, :price_ceil, :price_floor)
+		@cons = params.slice(:keywords, :states, :state_, :number, :driver_id, :sale_id, :fache_before, :fache_after, :price_ceil, :price_floor, :origin, :destination)
 	end
 end

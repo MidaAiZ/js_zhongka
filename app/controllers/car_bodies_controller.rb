@@ -10,6 +10,7 @@ class CarBodiesController < ApplicationController
   # GET /car_bodies/1
   # GET /car_bodies/1.json
   def show
+    @orders = @car_body.orders.includes(:drivers, :sales, :car_head, :car_body)
   end
 
   # GET /car_bodies/new

@@ -186,7 +186,6 @@ CREATE TABLE public.orders (
     id bigint NOT NULL,
     order_number character varying,
     price double precision,
-    driver_id character varying,
     car_number character varying,
     car_body_id integer,
     goods character varying,
@@ -203,13 +202,20 @@ CREATE TABLE public.orders (
     state integer,
     last_state integer,
     customer_id integer,
-    sale_name character varying,
-    pay_type character varying,
-    pay_time timestamp without time zone,
     remark character varying,
     is_deleted boolean DEFAULT false NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    total_fee integer DEFAULT 0 NOT NULL,
+    via_stations character varying DEFAULT ''::character varying,
+    pay1_amount integer,
+    pay1_type character varying,
+    pay1_time timestamp without time zone,
+    pay2_amount integer,
+    pay2_type character varying,
+    pay2_time timestamp without time zone,
+    customer_name character varying,
+    customer_tel character varying
 );
 
 
@@ -409,10 +415,38 @@ CREATE UNIQUE INDEX idx_orders_sales_on_oid_sid ON public.orders_sales USING btr
 
 
 --
+-- Name: index_car_bodies_on_body_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_car_bodies_on_body_id ON public.car_bodies USING btree (body_id);
+
+
+--
+-- Name: index_car_heads_on_car_number; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_car_heads_on_car_number ON public.car_heads USING btree (car_number);
+
+
+--
 -- Name: index_drivers_orders_on_driver_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_drivers_orders_on_driver_id ON public.drivers_orders USING btree (driver_id);
+
+
+--
+-- Name: index_orders_on_car_body_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_orders_on_car_body_id ON public.orders USING btree (car_body_id);
+
+
+--
+-- Name: index_orders_on_car_number; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_orders_on_car_number ON public.orders USING btree (car_number);
 
 
 --
@@ -436,6 +470,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200414155107'),
 ('20200414160759'),
 ('20200414180807'),
-('20200414181241');
+('20200414181241'),
+('20200418151411'),
+('20200418163238'),
+('20200418173334');
 
 

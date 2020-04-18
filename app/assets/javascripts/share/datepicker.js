@@ -1,3 +1,6 @@
+//= require moment
+//= require moment/zh-cn.js
+//= require bootstrap-datetimepicker
 //= require bootstrap-datepicker
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.js
 
@@ -10,6 +13,15 @@ function initDate() {
       format: 'yyyy-mm-dd',
       todayHighlight: true,
       orientation: 'bottom',
+  }).on('changeDate', function(ev) {
+      $(this).trigger("blur");
+      // if (ev.date.valueOf() < date-start-display.valueOf()){}
+  });
+
+  $('.input.datetime').datetimepicker({
+    format: 'YYYY-MM-DD hh:mm',
+    locale: moment.locale('zh-cn'),
+    showTodayButton: true,
   }).on('changeDate', function(ev) {
       $(this).trigger("blur");
       // if (ev.date.valueOf() < date-start-display.valueOf()){}

@@ -1,24 +1,61 @@
-<p id="notice"><%= notice %></p>
+<div class="page-heading">
+  <ul class="breadcrumb">
+    <li>
+      <a href="/car_bodies">挂车管理</a>
+    </li>
+    <li class="active">
+      <a href="">详细信息</a>
+    </li>
+    <li class="pull-right flex">
+    </li>
+  </ul>
+</div>
 
-<p>
-  <strong>Body:</strong>
-  <%= @car_body.body_id %>
-</p>
+<div class="wrapper order-detail">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-heading">
+          挂车详情
+        </div>
+        <div class="panel-body">
+          <ul class="p-info o-info">
+            <li>
+              <div class="title">挂车号</div>
+              <div class="desk"><%= @car_body.body_id %></div>
+            </li>
+            <li>
+              <div class="title">车型</div>
+              <div class="desk"><%= @car_body.body_type %></div>
+            </li>
+            <li>
+              <div class="title">品牌</div>
+              <div class="desk"><%= @car_body.brand %></div>
+            </li>
+            <li>
+              <div class="title">限重</div>
+              <div class="desk"><%= @car_body.max_weight %></div>
+            </li>
+            <li>
+              <div class="title">状态</div>
+              <div class="desk"><%= @car_body.status %></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Body type:</strong>
-  <%= @car_body.body_type %>
-</p>
-
-<p>
-  <strong>Brand:</strong>
-  <%= @car_body.brand %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @car_body.status %>
-</p>
-
-<%= link_to 'Edit', edit_car_body_path(@car_body) %> |
-<%= link_to 'Back', car_bodies_path %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-heading">
+          订单列表
+        </div>
+        <div class="panel-body">
+          <%= render "/orders/list" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

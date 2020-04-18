@@ -10,6 +10,7 @@ class DriversController < ApplicationController
   # GET /drivers/1
   # GET /drivers/1.json
   def show
+    @orders = @driver.orders.includes(:drivers, :sales, :car_head, :car_body)
   end
 
   # GET /drivers/new

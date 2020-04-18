@@ -1,39 +1,61 @@
-<p id="notice"><%= notice %></p>
+<div class="page-heading">
+  <ul class="breadcrumb">
+    <li>
+        <a href="/sales">业务员管理</a>
+    </li>
+    <li class="active">
+      <a href="">详细信息</a>
+    </li>
+    <li class="pull-right flex">
+    </li>
+  </ul>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @sale.name %>
-</p>
+<div class="wrapper order-detail">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-heading">
+          业务员详情
+        </div>
+        <div class="panel-body">
+          <ul class="p-info o-info">
+            <li>
+              <div class="title">姓名</div>
+              <div class="desk"><%= @sale.name %></div>
+            </li>
+            <li>
+              <div class="title">电话</div>
+              <div class="desk"><%= @sale.tel %></div>
+            </li>
+            <li>
+              <div class="title">性别</div>
+              <div class="desk"><%= @sale.gender %></div>
+            </li>
+            <li>
+              <div class="title">出生年月</div>
+              <div class="desk"><%= @sale.age %></div>
+            </li>
+            <li>
+              <div class="title">入职时间</div>
+              <div class="desk"><%= @sale.join_time %></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Tel:</strong>
-  <%= @sale.tel %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @sale.gender %>
-</p>
-
-<p>
-  <strong>Age:</strong>
-  <%= @sale.age %>
-</p>
-
-<p>
-  <strong>Join time:</strong>
-  <%= @sale.join_time %>
-</p>
-
-<p>
-  <strong>Info:</strong>
-  <%= @sale.info %>
-</p>
-
-<p>
-  <strong>Remark:</strong>
-  <%= @sale.remark %>
-</p>
-
-<%= link_to 'Edit', edit_sale_path(@sale) %> |
-<%= link_to 'Back', sales_path %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-heading">
+          订单列表
+        </div>
+        <div class="panel-body">
+          <%= render "/orders/list" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

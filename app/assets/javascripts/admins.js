@@ -29,7 +29,6 @@ var EditableTable = function() {
         jqTds[3].innerHTML = '<select class="form-control">\
                                 <option></option>\
                                 <option value="common">管理员</option>\
-                                <option value="delivery">配送员</option>\
                               </select>';
         jqTds[5].innerHTML = '<a class="edit" href="">保存</a>';
         if (id) $(jqTds[5]).find("a.edit").attr("data-id", id);

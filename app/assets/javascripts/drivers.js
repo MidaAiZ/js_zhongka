@@ -23,7 +23,7 @@ var EditableTable = function() {
       function editRow(oTable, nRow, id) {
         var aData = oTable.fnGetData(nRow);
         var jqTds = $('>td', nRow);
-        jqTds[0].innerHTML = '<input type="text" class="form-control small" value="' + aData[0] + '">';
+        jqTds[0].innerHTML = '<input type="text" class="form-control small" value="' + $(aData[0]).text() + '">';
         jqTds[1].innerHTML = '<input type="text" class="form-control small" value="' + aData[1] + '">';
         jqTds[2].innerHTML = '<select class="form-control" selected=' + aData[2] + '>\
                                 <option value="男" ' + (aData[2] == '男' ? "selected" : "") + '>男</option>\
@@ -54,7 +54,7 @@ var EditableTable = function() {
           type: type,
           dataType: 'JSON',
           success: function(res) {
-            oTable.fnUpdate(res.name, nRow, 0, false);
+            oTable.fnUpdate('<a href="/drivers/'+ res.id +'" >' + res.name + '</a>', nRow, 0, false);
             oTable.fnUpdate(res.tel, nRow, 1, false);
             oTable.fnUpdate(res.gender, nRow, 2, false);
             oTable.fnUpdate(res.age, nRow, 3, false);

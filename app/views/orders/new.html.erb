@@ -1,6 +1,7 @@
+<!-- page heading start-->
 <div class="page-heading">
     <h3>
-        创建订单
+        新建订单
     </h3>
     <ul class="breadcrumb">
         <li>
@@ -8,5 +9,13 @@
         </li>
         <li class="active"> 新建 </li>
     </ul>
+    <% if notice %>
+      <h4 class="form-error"><%= notice %></h4>
+    <% end %>
 </div>
+<!-- page heading end-->
 <%= render 'form', order: @order %>
+
+<script>
+
+</script>

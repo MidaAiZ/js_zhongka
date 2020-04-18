@@ -10,6 +10,7 @@ class SalesController < ApplicationController
   # GET /sales/1
   # GET /sales/1.json
   def show
+    @orders = @sale.orders.includes(:drivers, :sales, :car_head, :car_body)
   end
 
   # GET /sales/new

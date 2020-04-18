@@ -1,6 +1,20 @@
-<h1>编辑订单</h1>
+<!-- page heading start-->
+<div class="page-heading">
+  <h3>
+    修改订单
+  </h3>
+  <ul class="breadcrumb">
+    <li>
+      <%= link_to '订单详情', order_path(@order) %>
+    </li>
+    <li class="active">
+      编辑
+    </li>
+  </ul>
+</div>
+<!-- page heading end-->
 
 <%= render 'form', order: @order %>
 
-<%= link_to '展示', @order %> |
-<%= link_to '返回', orders_path %>
+<script>
+</script>

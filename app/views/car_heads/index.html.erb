@@ -57,7 +57,7 @@
                             <tbody>
                                 <% @car_heads.each do |head| %>
                                     <tr class="">
-                                        <td><%= head.car_number %></td>
+                                        <td><%= link_to head.car_number, head %></td>
                                         <td><%= head.head_type %></td>
                                         <td><%= head.brand %></td>
                                         <td><%= head.fuel_type %></td>

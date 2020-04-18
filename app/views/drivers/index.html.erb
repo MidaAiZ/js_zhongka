@@ -50,7 +50,7 @@
                                 <th>性别</th>
                                 <th>出生日期</th>
                                 <th>入职时间</th>
-                                <th>运单总数</th>
+                                <th>运单总数（点击查看）</th>
                                 <th>编辑</th>
                                 <th>删除</th>
                             </tr>
@@ -58,12 +58,12 @@
                             <tbody>
                                 <% @drivers.each do |driver| %>
                                     <tr class="">
-                                        <td><%= driver.name %></td>
+                                        <td><%= link_to driver.name, driver %></td>
                                         <td><%= driver.tel %></td>
                                         <td><%= driver.gender %></td>
                                         <td><%= driver.age %></td>
                                         <td><%= driver.join_time %></td>
-                                        <td><%= driver.orders_count %></td>
+                                        <td><%= link_to driver.orders_count, orders_path(driver_id: driver.id)  %></td>
                                         <td><a class="edit" href="javascript:;" data-id='<%= driver.id %>'>编辑</a></td>
                                         <td><a class="delete" href="javascript:;" data-id='<%= driver.id %>'>删除</a></td>
                                     </tr>

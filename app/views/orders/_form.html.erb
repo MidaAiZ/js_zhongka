@@ -28,6 +28,18 @@
                 <div class="form-group">
                   <div class="row">
                     <div class="col-sm-6">
+                      <label for="order_spec">客户姓名</label>
+                      <input type="text" id='order_customer_name' name='order[customer_name]' class="form-control" placeholder="请输入客户姓名" value="<%= @order.customer_name %>" >
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="order_customer_tel">客户电话</label>
+                      <input type="text" id='order_customer_tel' name='order[customer_tel]' class="form-control" placeholder="请输入客户电话" value="<%= @order.customer_tel %>" >
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
                       <label for="order_spec">司机</label>
                       <% @order.driver_ids.each do |id| %>
                         <input type="hidden" id='order_driver_id' name='order[driver_ids][]' class="form-control" placeholder="请选择司机" value="<%= id %>">
@@ -36,7 +48,7 @@
                       <div class="cdt-select" placeholder="输入司机姓名查询" data-multi="true" data-search-url="<%= drivers_path %>" data-default="<%= (@order.drivers.map{|d| d.name}).join(",") %>" data-key="name" data-keywords="order[driver_ids]" data-json="<%= Driver.all.select(:id, :name).to_json %>"></div>
                     </div>
                     <div class="col-sm-6">
-                      <label for="order_price">订单价格（元）</label>
+                      <label for="order_price">运单价格（元）</label>
                       <input type="number" id='order_price' name='order[price]' class="form-control" placeholder="请输入订单价格" value="<%= @order.price %>">
                     </div>
                   </div>
@@ -46,12 +58,12 @@
                     <div class="col-sm-6">
                       <label for="order_spec">车头(车牌号)</label>
                       <input type="hidden" id='order_car_number' name='order[car_number]' class="form-control" placeholder="请输入车牌" value="<%= @order.car_number %>">
-                      <div class="cdt-select" placeholder="输入车头号查询" data-search-url="<%= car_bodies_path %>" data-default="<%= @order.car_number %>" data-key="car_number" data-keywords="order[car_number]" data-json="<%= CarHead.all.select(:id, :car_number).to_json %>"></div>
+                      <div class="cdt-select" placeholder="输入车头号查询" data-search-url="<%= car_bodies_path %>" data-default="<%= @order.car_head.try :car_number %>" data-key="car_number" data-keywords="order[car_number]" data-json="<%= CarHead.all.select(:id, :car_number).to_json %>"></div>
                     </div>
                     <div class="col-sm-6">
-                      <label for="order_price">挂车</label>
+                      <label for="order_price">挂车号</label>
                       <input type="hidden" id='order_car_body_id' name='order[car_body_id]' class="form-control" placeholder="请输入挂车号" value="<%= @order.car_body_id %>">
-                      <div class="cdt-select" placeholder="输入挂车号查询" data-search-url="<%= car_bodies_path %>" data-default="<%= @order.car_body_id %>" data-key="body_id" data-keywords="order[car_body_id]" data-json="<%= CarBody.all.select(:id, :body_id).to_json %>"></div>
+                      <div class="cdt-select" placeholder="输入挂车号查询" data-search-url="<%= car_bodies_path %>" data-default="<%= @order.car_body.try :body_id %>" data-key="body_id" data-keywords="order[car_body_id]" data-json="<%= CarBody.all.select(:id, :body_id).to_json %>"></div>
                     </div>
                   </div>
                 </div>
@@ -63,10 +75,43 @@
                     </div>
                     <div class="col-sm-6">
                       <label for="order_price">重量（吨）</label>
-                      <input type="text" id='order_weight' name='order[weight]' class="form-control" placeholder="请输入重量" value="<%= @order.weight %>">
+                      <input type="number" id='order_weight' name='order[weight]' class="form-control" placeholder="请输入重量" value="<%= @order.weight %>">
                     </div>
                   </div>
                 </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label for="order_sale_name">业务员</label>
+                      <% @order.sale_ids.each do |id| %>
+                        <input type="hidden" id='order_sale_name' name='order[sale_ids][]' class="form-control" placeholder="请选择销售员" value="<%= id %>">
+                      <% end %>
+                      <input type="hidden" id='order_sale_name' name='order[sale_ids][]' class="form-control" placeholder="请选择销售员">
+                      <div class="cdt-select" placeholder="输入业务员姓名查询" data-multi="true" data-search-url="<%= sales_path %>" data-default="<%= (@order.sales.map{|s| s.name}).join(",") %>" data-key="name" data-keywords="order[sale_ids]" data-json="<%= Sale.all.select(:id, :name).to_json %>"></div>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="order_pay_type">订单状态</label>
+                      <select name="order[state]" id="order_state" class="form-control">
+                        <% Order.STATE_TEXT.each do |pair| %>
+                          <option value="<%= pair[0] %>" <%= pair[0] == @order.state ? :selected : '' %>><%= pair[1] %></option>
+                        <% end %>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class='panel'>
+        <div class="row">
+          <div class="col-xs-12 col-md-12">
+            <div class="panel panel-split">
+              <div class="panel-heading">
+                运输信息
+              </div>
+              <div class="panel-body">
                 <div class="form-group">
                   <div class="row">
                     <div class="col-sm-6">
@@ -82,64 +127,24 @@
                 <div class="form-group">
                   <div class="row">
                     <div class="col-sm-6">
+                      <label for="order_spec">运输距离（km）</label>
+                      <input type="text" id='order_toll_gate' name='order[distance]' class="form-control" placeholder="请输入运输距离（公里km）" value="<%= @order.distance %>">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="order_price">途经站点</label>
+                      <input type="text" id='order_via_stations' name='order[via_stations]' class="form-control" placeholder="请输入途经站点" value="<%= @order.via_stations %>">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
                       <label for="order_spec">发车时间</label>
-                      <input type="text" id='order_start_time' name='order[start_time]' class="input date form-control" placeholder="请输入发车时间" value="<%= @order.start_time %>" autocomplete="off">
+                      <input type="text" id='order_start_time' name='order[start_time]' class="input datetime form-control" placeholder="请输入发车时间" value="<%= @order.start_time %>" autocomplete="off">
                     </div>
                     <div class="col-sm-6">
                       <label for="order_price">达到时间</label>
-                      <input type="text" id='order_destination' name='order[end_time]' class="input date form-control" placeholder="请输入到达时间" value="<%= @order.end_time %>" autocomplete="off">
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <label for="order_spec">油耗</label>
-                      <input type="text" id='order_oil_consumption' name='order[oil_consumption]' class="form-control" placeholder="请输入油耗（升）" value="<%= @order.oil_consumption %>">
-                    </div>
-                    <div class="col-sm-6">
-                      <label for="order_price">油费</label>
-                      <input type="text" id='order_oil_fee' name='order[oil_fee]' class="form-control" placeholder="请输入油费" value="<%= @order.oil_fee %>">
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <label for="order_spec">运输距离</label>
-                        <input type="text" id='order_toll_gate' name='order[distance]' class="form-control" placeholder="请输入运输距离（公里km）" value="<%= @order.distance %>">
-                      </div>
-                      <div class="col-sm-6">
-                        <label for="order_road_toll">过路费</label>
-                        <input type="text" id='order_road_toll' name='order[road_toll]' class="form-control" placeholder="请输入过路费" value="<%= @order.road_toll %>">
-                      </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <label for="order_pay_time">支付时间</label>
-                      <input type="text" id='order_pay_time' name='order[pay_time]' class="input date form-control" placeholder="请输入支付时间" value="<%= @order.pay_time %>" autocomplete="off">
-                    </div>
-                    <div class="col-sm-6">
-                      <label for="order_pay_type">支付方式</label>
-                      <input type="text" id='order_pay_type' name='order[pay_type]' class="form-control" placeholder="请输入支付方式" value="<%= @order.pay_type %>">
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <label for="order_sale_name">业务员</label>
-                      <% @order.sale_ids.each do |id| %>
-                        <input type="hidden" id='order_sale_name' name='order[sale_ids][]' class="form-control" placeholder="请选择销售员" value="<%= @order.id %>">
-                      <% end %>
-                      <input type="hidden" id='order_sale_name' name='order[sale_ids][]' class="form-control" placeholder="请选择销售员">
-                      <div class="cdt-select" placeholder="输入业务员姓名查询" data-multi="true" data-search-url="<%= sales_path %>" data-default="<%= (@order.sales.map{|s| s.name}).join(",") %>" data-key="name" data-keywords="order[sale_ids]" data-json="<%= Sale.all.select(:id, :name).to_json %>"></div>
-                    </div>
-                    <div class="col-sm-6">
-                      <label for="order_pay_type">订单备注</label>
-                      <input type="text" id='order_pay_type' name='order[remark]' class="form-control" placeholder="请输入订单备注" value="<%= @order.remark %>">
+                      <input type="text" id='order_destination' name='order[end_time]' class="input datetime form-control" placeholder="请输入到达时间" value="<%= @order.end_time %>" autocomplete="off">
                     </div>
                   </div>
                 </div>
@@ -148,6 +153,97 @@
           </div>
         </div>
       </section>
+      <section class='panel'>
+        <div class="row">
+          <div class="col-xs-12 col-md-12">
+            <div class="panel panel-split">
+              <div class="panel-heading">
+                费用信息
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label for="order_spec">油耗（升）</label>
+                      <input type="number" id='order_oil_consumption' name='order[oil_consumption]' class="form-control" placeholder="请输入油耗（升）" value="<%= @order.oil_consumption %>">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="order_price">油费（元）</label>
+                      <input type="number" id='order_oil_fee' name='order[oil_fee]' class="form-control" placeholder="请输入油费" value="<%= @order.oil_fee %>">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <label for="order_road_toll">过路费（元）</label>
+                        <input type="number" id='order_road_toll' name='order[road_toll]' class="form-control" placeholder="请输入过路费" value="<%= @order.road_toll %>">
+                      </div>
+                      <div class="col-sm-6">
+                        <label for="order_road_toll">运单总成本（元）</label>
+                        <input type="number" id='order_total_fee' name='order[total_fee]' class="form-control" placeholder="请输入总成本" value="<%= @order.total_fee %>">
+                      </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label for="order_pay_type">首款支付金额（元）</label>
+                      <input type="number" id='order_pay1_amount' name='order[pay1_amount]' class="form-control" placeholder="请输入首款金额" value="<%= @order.pay1_amount %>">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="order_pay_time">首款支付时间</label>
+                      <input type="text" id='order_pay1_time' name='order[pay1_time]' class="input datetime form-control" placeholder="请输入首款支付时间" value="<%= @order.pay1_time %>" autocomplete="off">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label for="order_pay_type">尾款支付金额（元）</label>
+                      <input type="number" id='order_pay1_amount' name='order[pay2_amount]' class="form-control" placeholder="请输入尾款金额" value="<%= @order.pay2_amount %>">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="order_pay_time">尾款支付时间</label>
+                      <input type="text" id='order_pay2_time' name='order[pay2_time]' class="input datetime form-control" placeholder="请输入尾款支付时间" value="<%= @order.pay2_time %>" autocomplete="off">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label for="order_pay_type">首款支付方式</label>
+                      <input type="text" id='order_pay1_type' name='order[pay1_type]' class="form-control" placeholder="请输入首款支付方式" value="<%= @order.pay1_type %>">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="order_pay_time">尾款支付方式</label>
+                      <input type="text" id='order_pay2_type' name='order[pay2_type]' class="form-control" placeholder="请输入尾款支付方式" value="<%= @order.pay2_type %>" autocomplete="off">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class='panel'>
+      <div class="row">
+        <div class="col-xs-12 col-md-12">
+          <div class="panel panel-split">
+            <div class="panel-heading">
+              其他信息
+            </div>
+            <div class="panel-body">
+              <div class="col-sm-12">
+                <label for="order_remark">订单备注</label>
+                <input type="text" id='order_remark' name='order[remark]' class="form-control" placeholder="请输入订单备注" value="<%= @order.remark %>">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
       <div class="actions">
         <button id='order-submit' class="btn btn-primary btn-wide" href="JavaScript:void(0)">提交</button>
       </div>

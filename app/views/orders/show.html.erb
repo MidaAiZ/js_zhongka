@@ -38,16 +38,40 @@
               <div class="desk"><%= @order.price %>元</div>
             </li>
             <li>
+              <div class="title">客户姓名</div>
+              <div class="desk"><%= @order.customer_name %></div>
+            </li>
+            <li>
+              <div class="title">客户手机号</div>
+              <div class="desk"><%= @order.customer_tel %></div>
+            </li>
+            <li>
               <div class="title">司机</div>
-              <div class="desk"><%= (@order.drivers.map {|d| d.name}).join(", ") %></div>
+              <div class="desk">
+                <% @order.drivers.each do |d| %>
+                  <%= link_to d.name + ' ', driver_path(d) %>
+                <% end %>
+              </div>
+            </li>
+            <li>
+              <div class="title">业务员</div>
+              <div class="desk">
+                <% @order.sales.each do |s| %>
+                  <%= link_to s.name + ' ', sale_path(s) %>
+                <% end %>
+              </div>
             </li>
             <li>
               <div class="title">车牌号</div>
-              <div class="desk"><%= @order.car_number %></div>
+              <div class="desk">
+                <td><%= link_to (@order.car_head.try :car_number) || '', car_head_path(@order.car_number.blank? ? 0 : @order.car_number) %></td>
+              </div>
             </li>
             <li>
-              <div class="title">挂车</div>
-              <div class="desk"><%= @order.car_body_id %></div>
+              <div class="title">挂车号</div>
+              <div class="desk">
+                <td><%= link_to (@order.car_body.try :body_id) || '', car_body_path(@order.car_body_id.blank? ? 0 : @order.car_body_id) %></td>
+              </div>
             </li>
             <li>
               <div class="title">货物</div>
@@ -64,6 +88,10 @@
             <li>
               <div class="title">目的地</div>
               <div class="desk"><%= @order.destination %></div>
+            </li>
+            <li>
+              <div class="title">途经站点</div>
+              <div class="desk"><%= @order.via_stations %></div>
             </li>
             <li>
               <div class="title">运输距离</div>
@@ -90,6 +118,14 @@
               <div class="desk"><%= @order.road_toll || 0 %>元</div>
             </li>
             <li>
+              <div class="title">订单总成本</div>
+              <div class="desk"><%= @order.total_fee || 0 %>元</div>
+            </li>
+            <li>
+              <div class="title">预计收益</div>
+              <div class="desk"><%= (@order.price || 0) - (@order.total_fee || 0) %>元</div>
+            </li>
+            <li>
               <div class="title">订单状态</div>
               <div class="desk"><%= @order.state_text %></div>
             </li>
@@ -98,12 +134,28 @@
               <div class="desk"><%= (@order.sales.map {|s| s.name}).join(", ") %></div>
             </li>
             <li>
-              <div class="title">支付方式</div>
-              <div class="desk"><%= @order.pay_type %></div>
+              <div class="title">首款支付方式</div>
+              <div class="desk"><%= @order.pay1_type %></div>
             </li>
             <li>
-              <div class="title">支付时间</div>
-              <div class="desk"><%= @order.pay_time %></div>
+              <div class="title">首款支付时间</div>
+              <div class="desk"><%= @order.pay1_time.try :strftime, '%Y-%m-%d %H:%M:%S' %></div>
+            </li>
+            <li>
+              <div class="title">首款支付金额（元）</div>
+              <div class="desk"><%= @order.pay1_amount %></div>
+            </li>
+            <li>
+              <div class="title">尾款支付方式</div>
+              <div class="desk"><%= @order.pay2_type %></div>
+            </li>
+            <li>
+              <div class="title">尾款支付时间</div>
+              <div class="desk"><%= @order.pay2_time.try :strftime, '%Y-%m-%d %H:%M:%S' %></div>
+            </li>
+            <li>
+              <div class="title">尾款支付金额（元）</div>
+              <div class="desk"><%= @order.pay2_amount %></div>
             </li>
             <li>
               <div class="title">订单备注</div>
@@ -115,4 +167,5 @@
     </div>
   </div>
   <%= link_to '返回', @orders_path %>
+  <%= link_to '删除订单', order_path(@order), method: :delete, data: { confirm: "确定删除该订单吗？" }, class: 'pull-right flex' %>
 </div>

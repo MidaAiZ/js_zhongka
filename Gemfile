@@ -19,6 +19,8 @@ gem 'bootstrap-sass'
 
 #日期选择插件
 gem 'bootstrap-datepicker-rails'
+gem 'bootstrap3-datetimepicker-rails'
+gem "momentjs-rails"
 
 # 分页插件
 gem 'kaminari'

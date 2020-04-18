@@ -57,7 +57,7 @@
                             <tbody>
                                 <% @car_bodies.each do |car| %>
                                     <tr class="">
-                                        <td><%= car.body_id %></td>
+                                        <td><%= link_to car.body_id, car %></td>
                                         <td><%= car.body_type %></td>
                                         <td><%= car.brand %></td>
                                         <td><%= car.max_weight %></td>

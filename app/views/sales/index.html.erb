@@ -58,12 +58,12 @@
                             <tbody>
                                 <% @sales.each do |sale| %>
                                     <tr class="">
-                                        <td><%= sale.name %></td>
+                                        <td><%= link_to sale.name, sale %></td>
                                         <td><%= sale.tel %></td>
                                         <td><%= sale.gender %></td>
                                         <td><%= sale.age %></td>
                                         <td><%= sale.join_time %></td>
-                                        <td><%= sale.orders_count %></td>
+                                        <td><%= link_to sale.orders_count, orders_path(sale_id: sale.id)  %></td>
                                         <td><a class="edit" href="javascript:;" data-id='<%= sale.id %>'>编辑</a></td>
                                         <td><a class="delete" href="javascript:;" data-id='<%= sale.id %>'>删除</a></td>
                                     </tr>

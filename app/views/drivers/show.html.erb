@@ -1,39 +1,61 @@
-<p id="notice"><%= notice %></p>
+<div class="page-heading">
+  <ul class="breadcrumb">
+    <li>
+      <a href="/drivers">司机管理</a>
+    </li>
+    <li class="active">
+      <a href="">详细信息</a>
+    </li>
+    <li class="pull-right flex">
+    </li>
+  </ul>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @driver.name %>
-</p>
+<div class="wrapper order-detail">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-heading">
+          司机详情
+        </div>
+        <div class="panel-body">
+          <ul class="p-info o-info">
+            <li>
+              <div class="title">姓名</div>
+              <div class="desk"><%= @driver.name %></div>
+            </li>
+            <li>
+              <div class="title">电话</div>
+              <div class="desk"><%= @driver.tel %></div>
+            </li>
+            <li>
+              <div class="title">性别</div>
+              <div class="desk"><%= @driver.gender %></div>
+            </li>
+            <li>
+              <div class="title">出生年月</div>
+              <div class="desk"><%= @driver.age %></div>
+            </li>
+            <li>
+              <div class="title">入职时间</div>
+              <div class="desk"><%= @driver.join_time %></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Tel:</strong>
-  <%= @driver.tel %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @driver.gender %>
-</p>
-
-<p>
-  <strong>Age:</strong>
-  <%= @driver.age %>
-</p>
-
-<p>
-  <strong>Join time:</strong>
-  <%= @driver.join_time %>
-</p>
-
-<p>
-  <strong>Info:</strong>
-  <%= @driver.info %>
-</p>
-
-<p>
-  <strong>Remark:</strong>
-  <%= @driver.remark %>
-</p>
-
-<%= link_to 'Edit', edit_driver_path(@driver) %> |
-<%= link_to 'Back', drivers_path %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-heading">
+          订单列表
+        </div>
+        <div class="panel-body">
+          <%= render "/orders/list" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

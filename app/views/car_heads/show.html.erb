@@ -1,24 +1,61 @@
-<p id="notice"><%= notice %></p>
+<div class="page-heading">
+  <ul class="breadcrumb">
+    <li>
+      <a href="/car_heads">车头管理</a>
+    </li>
+    <li class="active">
+      <a href="">详细信息</a>
+    </li>
+    <li class="pull-right flex">
+    </li>
+  </ul>
+</div>
 
-<p>
-  <strong>Cur number:</strong>
-  <%= @car_head.car_number %>
-</p>
+<div class="wrapper order-detail">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-heading">
+          车头详情
+        </div>
+        <div class="panel-body">
+          <ul class="p-info o-info">
+            <li>
+              <div class="title">车牌号</div>
+              <div class="desk"><%= @car_head.car_number %></div>
+            </li>
+            <li>
+              <div class="title">车型</div>
+              <div class="desk"><%= @car_head.head_type %></div>
+            </li>
+            <li>
+              <div class="title">品牌</div>
+              <div class="desk"><%= @car_head.brand %></div>
+            </li>
+            <li>
+              <div class="title">燃料类型</div>
+              <div class="desk"><%= @car_head.fuel_type %></div>
+            </li>
+            <li>
+              <div class="title">状态</div>
+              <div class="desk"><%= @car_head.status %></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Head type:</strong>
-  <%= @car_head.head_type %>
-</p>
-
-<p>
-  <strong>Brand:</strong>
-  <%= @car_head.brand %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @car_head.status %>
-</p>
-
-<%= link_to 'Edit', edit_car_head_path(@car_head) %> |
-<%= link_to 'Back', car_heads_path %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-heading">
+          订单列表
+        </div>
+        <div class="panel-body">
+          <%= render "/orders/list" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
