@@ -75,8 +75,8 @@ class OrdersController < ApplicationController
     end
 
     def filter_cons
-		@count = params[:count] || 20
-		@page = params[:page] || 1
-		@cons = params.slice(:keywords, :states, :state_, :number, :driver_id, :sale_id, :fache_before, :fache_after, :price_ceil, :price_floor, :origin, :destination)
-	end
+  		@count = params[:count] || 20
+  		@page = params[:page] || 1
+  		@cons = params.slice(:keywords, :states, :state_, :number, :driver_id, :sale_id, :fache_before, :fache_after, :price_ceil, :price_floor, :origin, :destination)
+	  end
 end

@@ -1,0 +1,149 @@
+<!-- page heading start-->
+<div class="page-heading">
+  <ul class="breadcrumb">
+    <li>
+      <a href="">计划管理</a>
+    </li>
+    <li class="active">
+      <a href="/schedules">计划列表</a>
+    </li>
+    <li class="pull-right flex">
+      <form class="" id='proSearch' method="get">
+        <input type="text" class="form-control" name="keywords" placeholder="输入关键词搜索计划"/>
+      </form>
+    </li>
+  </ul>
+</div>
+<!-- page heading end-->
+
+<!--body wrapper start-->
+<div class="wrapper">
+  <div class="row">
+    <div class="col-sm-12">
+      <% if notice %>
+        <h4 style="color: #ff6666"><%= notice %></h4>
+      <% end %>
+      <section class="panel">
+        <div class="panel-heading">
+          <div class="clearfix">
+            <div class="btn-group">
+                <a href="/schedules/new" id="editable-sample_new" class="btn btn-primary">
+                    创建计划 <i class="fa fa-plus"></i>
+                </a>
+            </div>
+            <div class="btn-group pull-right">
+              <button id='btn-show-block' class="btn btn-default active">
+                <i class="fa fa-th-large"></i>
+              </button>
+              <button id='btn-show-table' class="btn btn-default">
+                <i class="fa fa-bars"></i>
+              </button>
+              <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">工具
+                <i class="fa fa-angle-down"></i>
+              </button>
+              <ul class="dropdown-menu pull-right">
+                <li>
+                  <a href="javascript:void(0)" id="print">打印</a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" id="export">导出为Excel</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="adv-table editable-table ">
+            <%= render "cdts" unless params[:pjax] == 'true' %>
+            <!-- <div class="space15"></div> -->
+            <% if params[:keywords] %>
+              <div style="padding-left: 15px; padding-top: 15px;">
+                搜索"<%= params[:keywords] %>"：
+              </div>
+            <% end %>
+            <div id="pjax-replace">
+              <% cache @schedules.cache_key, expires_in: 2.minutes do %>
+                <!--startprint-->
+                <div class="show-table">
+                  <%= render "list" %>
+                </div>
+                <!--endprint-->
+                <input type="hidden" id="total_count" value="<%= @schedules.total_count %>">
+                <%= paginate @schedules %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<!--body wrapper end-->
+
+<script type="text/javascript">
+  var $t = null;
+  $('body').on('click', '.new-shipping-record', function() {
+    $('#shipping-model').modal();
+    $("#shipping-form").attr('action', $(this).data('href'))
+    $t = $(this);
+  })
+  $("#confirm-shipping").on('click', function() {
+    // $("#shipping-form").submit();
+    var $form = $("#shipping-form");
+    var data = new FormData($form[0]);
+    console.log(location.origin + $form.attr('action'))
+    $.ajax({
+      url: location.origin + $form.attr('action'),
+      data: data,
+      type: 'POST',
+      dataType: 'JSON',
+      processData: false,
+      success: function() {
+        if ($t) {
+          $t.siblings('span.split').remove();
+          $t.remove();
+        }
+      },
+      error: function() {
+        alert('啊啊啊，出错啦！！！快去找可爱的达达来解决！');
+      },
+      complete: function() {
+        $('#shipping-model').modal('hide');
+      }
+    });
+    return false;
+  })
+</script>
+<%= stylesheet_link_tag 'share/selector' %>
+<%= javascript_include_tag 'share/selector' %>
+<script type="text/javascript">
+  $("#export").on('click', function() {
+    if ($('.cdts-panel #cdts').css('display') === 'none') {
+      alert('请先筛选条件选择导出计划');
+      $('.cdts-panel [role="show-cdts"]').click();
+      return;
+    }
+    var total_count = $("#total_count").val();
+    var bool =confirm('根据当前条件筛选，即将导出' + total_count + '条数据，是否继续？');
+    if (bool) {
+      var search = decodeURI(location.search);
+      const cons = [];
+      search.replace('?&', '?').slice(1).split('&').forEach(function(v) {
+        var c = v.split('=');
+        cons.push([c[0], c[1]]);
+      })
+      showLoading('正在导出中...');
+      var form = $("<form></form>");
+      form.hide();
+      form.attr('action', '/schedules/export/xlsx');
+      form.attr('method', 'get');
+      cons.forEach(function(v) {
+        form.append('<input type=hidden name="' + v[0] + '" value="'+ v[1] +'">')
+      })
+      $('body').after(form);
+      form.submit();
+      form.remove();
+      setTimeout(hideLoading, 1500);
+    }
+  })
+</script>

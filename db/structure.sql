@@ -286,6 +286,44 @@ ALTER SEQUENCE public.sales_id_seq OWNED BY public.sales.id;
 
 
 --
+-- Name: schedules; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.schedules (
+    id bigint NOT NULL,
+    name character varying,
+    begin_time timestamp(0) without time zone,
+    end_time timestamp(0) without time zone,
+    car_head_id integer,
+    car_body_id integer,
+    executor character varying,
+    "desc" character varying,
+    state integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: schedules_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.schedules_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: schedules_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.schedules_id_seq OWNED BY public.schedules.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -334,6 +372,13 @@ ALTER TABLE ONLY public.orders ALTER COLUMN id SET DEFAULT nextval('public.order
 --
 
 ALTER TABLE ONLY public.sales ALTER COLUMN id SET DEFAULT nextval('public.sales_id_seq'::regclass);
+
+
+--
+-- Name: schedules id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schedules ALTER COLUMN id SET DEFAULT nextval('public.schedules_id_seq'::regclass);
 
 
 --
@@ -390,6 +435,14 @@ ALTER TABLE ONLY public.orders
 
 ALTER TABLE ONLY public.sales
     ADD CONSTRAINT sales_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schedules schedules_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schedules
+    ADD CONSTRAINT schedules_pkey PRIMARY KEY (id);
 
 
 --
@@ -473,6 +526,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200414181241'),
 ('20200418151411'),
 ('20200418163238'),
-('20200418173334');
+('20200418173334'),
+('20200419052423');
 
 

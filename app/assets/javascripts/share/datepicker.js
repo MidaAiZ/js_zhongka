@@ -19,7 +19,7 @@ function initDate() {
   });
 
   $('.input.datetime').datetimepicker({
-    format: 'YYYY-MM-DD hh:mm',
+    format: 'YYYY-MM-DD HH:mm',
     locale: moment.locale('zh-cn'),
     showTodayButton: true,
   }).on('changeDate', function(ev) {

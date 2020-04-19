@@ -1,0 +1,79 @@
+<!-- page heading start-->
+<div class="page-heading">
+  <ul class="breadcrumb">
+    <li>
+      <a href="/schedules">计划管理</a>
+    </li>
+    <li class="active">
+      <a href="">计划：<%= @schedule.name %></a>
+    </li>
+    <li class="pull-right flex">
+    </li>
+  </ul>
+</div>
+<!-- page heading end-->
+
+<div class="wrapper @schedule-detail">
+  <div class="row">
+    <div class="col-md-12">
+      <% if notice %>
+        <h4 style="color: #ff6666"><%= notice %></h4>
+      <% end %>
+      <div class="panel">
+        <div class="panel-heading">
+          计划详情
+          <small>
+            <%= link_to '编辑', edit_schedule_path(@schedule), class: 'pull-right flex' %>
+          </small>
+        </div>
+        <div class="panel-body">
+
+          <ul class="p-info o-info">
+            <li>
+              <div class="title">计划名</div>
+              <div class="desk"><%= @schedule.name %></div>
+            </li>
+            <li>
+              <div class="title">执行者</div>
+              <div class="desk"><%= @schedule.executor %></div>
+            </li>
+            <li>
+              <td>
+                <div class="title">预计执行时间 </div>
+                <div class="desk"><%= @schedule.begin_time.try :strftime, '%Y-%m-%d %H:%M:%S' %></div>
+              </td>
+            </li>
+            <li>
+              <td>
+                <div class="title">截止时间 </div>
+                <div class="desk"><%= @schedule.end_time.try :strftime, '%Y-%m-%d %H:%M:%S' %></div>
+              </td>
+            </li>
+            <li>
+              <div class="title">车牌号</div>
+              <div class="desk">
+                <td><%= link_to (@schedule.car_head.try :car_number) || '', car_head_path(@schedule.car_head_id.blank? ? 0 : @schedule.car_head_id) %></td>
+              </div>
+            </li>
+            <li>
+              <div class="title">挂车号</div>
+              <div class="desk">
+                <td><%= link_to (@schedule.car_body.try :body_id) || '', car_body_path(@schedule.car_body_id.blank? ? 0 : @schedule.car_body_id) %></td>
+              </div>
+            </li>
+            <li>
+              <div class="title">计划状态</div>
+              <div class="desk"><%= @schedule.state %></div>
+            </li>
+            <li>
+              <div class="title">计划描述</div>
+              <div class="desk"><%= @schedule.desc %></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= link_to '返回', @schedules_path %>
+  <%= link_to '删除计划', schedule_path(@schedule), method: :delete, data: { confirm: "确定删除该计划吗？" }, class: 'pull-right flex' %>
+</div>

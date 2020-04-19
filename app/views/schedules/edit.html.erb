@@ -1,0 +1,20 @@
+<!-- page heading start-->
+<div class="page-heading">
+  <h3>
+    修改计划
+  </h3>
+  <ul class="breadcrumb">
+    <li>
+      <%= link_to '计划详情', schedule_path(@schedule) %>
+    </li>
+    <li class="active">
+      编辑
+    </li>
+  </ul>
+</div>
+<!-- page heading end-->
+
+<%= render 'form', schedule: @schedule %>
+
+<script>
+</script>

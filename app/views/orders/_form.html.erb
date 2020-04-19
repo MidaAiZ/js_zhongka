@@ -58,7 +58,7 @@
                     <div class="col-sm-6">
                       <label for="order_spec">车头(车牌号)</label>
                       <input type="hidden" id='order_car_number' name='order[car_number]' class="form-control" placeholder="请输入车牌" value="<%= @order.car_number %>">
-                      <div class="cdt-select" placeholder="输入车头号查询" data-search-url="<%= car_bodies_path %>" data-default="<%= @order.car_head.try :car_number %>" data-key="car_number" data-keywords="order[car_number]" data-json="<%= CarHead.all.select(:id, :car_number).to_json %>"></div>
+                      <div class="cdt-select" placeholder="输入车头号查询" data-search-url="<%= car_heads_path %>" data-default="<%= @order.car_head.try :car_number %>" data-key="car_number" data-keywords="order[car_number]" data-json="<%= CarHead.all.select(:id, :car_number).to_json %>"></div>
                     </div>
                     <div class="col-sm-6">
                       <label for="order_price">挂车号</label>

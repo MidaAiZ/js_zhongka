@@ -1,0 +1,229 @@
+<% if notice %>
+  <h3><%= notice %></h3>
+<% end %>
+<div class="wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <%= form_with(model: schedule, local: true, html: { id: 'schedule-form', 'data-id' => @schedule.id, valid: false }) do |f| %>
+      <div id="error">
+        <% if @schedule.errors.any? %>
+          <div id="error_explanation">
+            <h3>存在<%= @schedule.errors.count %>个错误信息</h3>
+            <ul>
+              <% @schedule.errors.full_messages.each do |message| %>
+                <li class="form-error"><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+      <section class='panel'>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12">
+            <div class="panel panel-split">
+              <div class="panel-heading">
+                计划信息
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label for="schedule_name">计划名称</label>
+                      <input type="text" id='schedule_name' name='schedule[name]' class="form-control" placeholder="请输入计划名称" value="<%= @schedule.name %>" >
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="schedule_executor">执行者</label>
+                      <input type="text" id='schedule_executor' name='schedule[executor]' class="form-control" placeholder="请输入执行者" value="<%= @schedule.executor %>" >
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label for="schedule_start_time">预期执行时间</label>
+                      <input type="text" id='schedule_start_time' name='schedule[begin_time]' class="input datetime form-control" placeholder="请选择时间" value="<%= @schedule.begin_time %>" autocomplete="off">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="schedule_destination">截止时间</label>
+                      <input type="text" id='schedule_end_time' name='schedule[end_time]' class="input datetime form-control" placeholder="请选择时间" value="<%= @schedule.end_time %>" autocomplete="off">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label for="schedule_head_id">关联车头</label>
+                      <input type="hidden" id='schedule_head_id' name='schedule[car_head_id]' class="form-control" placeholder="请输入车牌" value="<%= @schedule.car_head_id %>">
+                      <div class="cdt-select" placeholder="输入车头号查询" data-search-url="<%= car_heads_path %>" data-default="<%= @schedule.car_head.try :car_number %>" data-key="car_number" data-keywords="schedule[car_head_id]" data-json="<%= CarHead.all.select(:id, :car_number).to_json %>"></div>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="schedule_price">关联挂车</label>
+                      <input type="hidden" id='schedule_car_body_id' name='schedule[car_body_id]' class="form-control" placeholder="请输入挂车号" value="<%= @schedule.car_body_id %>">
+                      <div class="cdt-select" placeholder="输入挂车号查询" data-search-url="<%= car_bodies_path %>" data-default="<%= @schedule.car_body.try :body_id %>" data-key="body_id" data-keywords="schedule[car_body_id]" data-json="<%= CarBody.all.select(:id, :body_id).to_json %>"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <label for="schedule_spec">计划状态</label>
+                      <select name="schedule[state]" id="schedule_state" class="form-control">
+                      <% Schedule.states.each do |pair| %>
+                        <option value="<%= pair[0] %>" <%= pair[0] == @schedule.state ? :selected : '' %>><%= pair[0] %></option>
+                      <% end %>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <label for="schedule_desc">计划描述</label>
+                      <textarea id='schedule_desc' name='schedule[desc]' class="form-control" placeholder="请输入计划描述">
+                        <%= @schedule.desc %>
+                      </textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="actions">
+        <button id='schedule-submit' class="btn btn-primary btn-wide" href="JavaScript:void(0)">提交</button>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+<%= stylesheet_link_tag 'cdtSelector/cdt-select-theme' %>
+<%= javascript_include_tag 'cdtSelector/cdtSelect' %>
+<script>
+$('body').on("keydown", "input", function (event) {
+  event.stopPropagation();
+  var code;
+  if (event) {
+    event = window.event; //针对ie浏览器
+  }
+  code = event.keyCode;
+  if (code == 13) {
+    $(this).blur();
+    event.preventDefault();
+  }
+});
+
+$('#schedule-submit').on('click', function () {
+  var inputs = $("#schedule-form").find('input, [name], [data-name]');
+  // inputs.each(function (index, item) {
+  //   var val = $(item).val();
+  //   if (!val && val !== 0 && val !== false) {
+  //     $(item).attr('data-name', $(item).attr('name'));
+  //     $(item).removeAttr('name');
+  //   } else if (!$(item).attr('name')) {
+  //     $(item).attr('name', $(item).attr('data-name'));
+  //   }
+  // });
+  var spec = $("#schedule_spec").val();
+  $("#schedule_spec").val(spec.trim().split(" ").join("|"));
+  // showLoading();
+  $('#schedule-form').submit();
+  return false;
+});
+
+
+$(function () {
+  $('.cdt-select').on('click', '.cdt-info .del', function() {
+    $(this).parents('.cdt-select').siblings('[value="'+ $(this).parent().data('id') +'"]').removeAttr('value');
+  });
+  $('.cdt-select').each(function () {
+    var $this = $(this);
+    var datas = $this.data("json");
+    var hots = [];
+    var key = $this.data('key');
+    if (key && key !== 'name') {
+      for (var i in datas) {
+        datas[i].name = datas[i][key];
+      }
+    }
+    for (var i in datas) {
+      hots.push(datas[i].name);
+    }
+    var selector = $this.cdtSelect({
+      dataJson: datas,
+      multiSelect: $(this).data("multi") || false,
+      search: true,
+      hotcdt: hots,
+      onCallerAfter: function (target, values) {
+        var vals = $this.find(".cdt-info span").map(function (i, v) {
+          return $(v).data('id')
+        });
+        var $inputs = $this.siblings("input");
+        vals.each(function (i, v) {
+          if ($inputs[i])
+            $($inputs[i]).val(v);
+          else {
+            var $input = $($inputs[0]).clone();
+            $input.attr('type', 'hidden');
+            $input.val(v);
+            $this.before($input);
+          }
+        })
+        $inputs.each(function (i, v) {
+          if (i >= vals.length)
+            $(v).remove();
+          }
+        )
+      },
+      onAjaxSearch: function (value, target) {
+        var result = [];
+        var keywords = $(target).parents('.cdt-select').data('keywords');
+        if (!keywords)
+          keywords = 'name';
+        keys = keywords.split('|');
+        cdts = keys.map(function (k) {
+          return k + '=' + value;
+        }).join('&');
+        $.ajax({
+          url: $this.data("search-url") + "?" + cdts,
+          type: "GET",
+          async: false,
+          success: function (data) {
+            result = data.list || data;
+          },
+          error: function (err) {}
+        });
+        if (key) {
+          for (var i in result) {
+            result[i].name = result[i][key];
+          }
+        }
+        return result;
+      }
+    });
+    (($this.data("default") || "") + "").split(",").forEach(function(v) {
+      console.log(v)
+       selector.setcdtVal(v.toString());
+    })
+
+    if ($this.hasClass('force-default')) { // FIX selector bug，当选项出现,分隔符时无法设置默认选中
+      selector.$selector.find('.cdt-input')
+                        .siblings('span').remove()
+                        .end()
+                        .before('<span data-id="'+ $this.data("default") +'">'+ $this.data("default") +'<i class="del"></i></span>');
+    }
+  })
+
+  $('.cdt-select[disabled] input').attr('disabled', true).attr('placeholder', '不可修改');
+
+  $('.cdt-select[disabled] input').on('input', function(e) {
+    e.preventDefault();
+    return false;
+  })
+  $('.cdt-select[disabled] *').on('click', function(e) {
+    e.preventDefault();
+    return false;
+  })
+})
+</script>

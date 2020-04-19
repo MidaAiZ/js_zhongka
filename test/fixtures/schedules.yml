@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  begin_time: 2020-04-19
+  end_time: 2020-04-19
+  car_head_id: 1
+  car_body_id: 1
+  executor: MyString
+  desc: MyString
+
+two:
+  name: MyString
+  begin_time: 2020-04-19
+  end_time: 2020-04-19
+  car_head_id: 1
+  car_body_id: 1
+  executor: MyString
+  desc: MyString
