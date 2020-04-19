@@ -17,6 +17,9 @@ gem 'sass-rails', '~> 5.0'
 # bootstrap 3
 gem 'bootstrap-sass'
 
+# 地图
+gem 'echarts-rails'
+
 #日期选择插件
 gem 'bootstrap-datepicker-rails'
 gem 'bootstrap3-datetimepicker-rails'

@@ -121,6 +121,7 @@ GEM
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     e2mmap (0.1.0)
+    echarts-rails (0.1.8)
     erubi (1.8.0)
     et-orbi (1.2.4)
       tzinfo
@@ -359,6 +360,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   cropper-rails
   dalli
+  echarts-rails
   jbuilder (~> 2.5)
   jquery-rails
   kaminari

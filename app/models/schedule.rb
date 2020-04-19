@@ -14,8 +14,8 @@ class Schedule < ApplicationRecord
        _self = _self.where('name like ? OR executor like ?', "%#{k}%", "%#{k}%")
      end
      _self = _self.unscope(where: :states).where(state: cons[:states]) if cons[:states] # 数组
-     _self = _self.where('orders.end_time <= ?', cons[:fache_before]) if cons[:begin_before]
-     _self = _self.where('orders.begin_time >= ?', cons[:fache_after]) if cons[:begin_after]
+     _self = _self.where('end_time <= ?', cons[:begin_before]) if cons[:begin_before]
+     _self = _self.where('begin_time >= ?', cons[:begin_after]) if cons[:begin_after]
      _self
    end
 end

@@ -77,6 +77,6 @@ class SchedulesController < ApplicationController
     def filter_cons
       @count = params[:count] || 20
       @page = params[:page] || 1
-      @cons = params.slice(:keywords, :states, :begin_time, :end_time)
+      @cons = params.slice(:keywords, :states, :begin_before, :begin_after)
     end
 end

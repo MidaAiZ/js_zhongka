@@ -138,6 +138,18 @@ class Order < ApplicationRecord
     (sales.map {|s| s.name}).join(', ')
   end
 
+  def self.statistics_map time_begin, time_end
+    os = Order.where(start_time: time_begin..time_end).all
+    map = {}
+    os.each do |o|
+      if !o.origin.blank? && !o.destination.blank? then
+         map[o.origin] ||= []
+         map[o.origin] << o.destination
+       end
+    end
+    map
+  end
+
   private
 
   def gen_number_series

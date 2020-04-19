@@ -5,17 +5,17 @@
 //= require flot-chart/jquery.flot.resize.min
 
 $(function(){
-    $.ajax({
-        url: '/manage/products_count',
-        type: 'get',
-        dataType: 'json',
-        success: function(res) {
-            build_chart(res);
-        },
-        error: function() {
-
-        }
-    })
+    // $.ajax({
+    //     url: '/products_count',
+    //     type: 'get',
+    //     dataType: 'json',
+    //     success: function(res) {
+    //         build_chart(res);
+    //     },
+    //     error: function() {
+    //
+    //     }
+    // })
     function build_chart(data) {
         // Use Morris.Area instead of Morris.Line
         Morris.Donut({
@@ -57,7 +57,7 @@ $(function(){
 $(function() {
 
     $.ajax({
-        url: '/manage/viewers_count',
+        url: '/viewers_count',
         type: 'get',
         dataType: 'JSON',
         success: function(res) {
@@ -70,14 +70,14 @@ $(function() {
     function build_v_chart(data) {
 
         var d1 = [
-            [1, data.p_7_count],
-            [2, data.p_6_count],
-            [3, data.p_5_count],
-            [4, data.p_4_count],
-            [5, data.p_3_count],
-            [6, data.p_2_count],
-            [7, data.p_1_count],
-            [8, data.p_0_count]
+            [1, data.m_7_count / 10000],
+            [2, data.m_6_count / 10000],
+            [3, data.m_5_count / 10000],
+            [4, data.m_4_count / 10000],
+            [5, data.m_3_count / 10000],
+            [6, data.m_2_count / 10000],
+            [7, data.m_1_count / 10000],
+            [8, data.m_0_count / 10000]
         ];
 
         var d2 = [
@@ -92,27 +92,17 @@ $(function() {
         ];
 
         var d3 = [
-            [1, data.pt_7_count],
-            [2, data.pt_6_count],
-            [3, data.pt_5_count],
-            [4, data.pt_4_count],
-            [5, data.pt_3_count],
-            [6, data.pt_2_count],
-            [7, data.pt_1_count],
-            [8, data.pt_0_count]
-        ]
+            [1, data.c_7_count / 10000],
+            [2, data.c_6_count / 10000],
+            [3, data.c_5_count / 10000],
+            [4, data.c_4_count / 10000],
+            [5, data.c_3_count / 10000],
+            [6, data.c_2_count / 10000],
+            [7, data.c_1_count / 10000],
+            [8, data.c_0_count / 10000]
+        ];
+
         var data = ([
-            {
-                label: "商品点击量",
-                data: d1,
-                lines: {
-                    show: true,
-                    fill: true,
-                    fillColor: {
-                        colors: ["rgba(255,255,255,.0)", "rgba(183,236,240,.4)"]
-                    }
-                }
-            },
             {
                 label: "订单量",
                 data: d2,
@@ -124,13 +114,35 @@ $(function() {
                     }
                 }
             },
+            {
+                label: "营收总额（万）",
+                data: d1,
+                lines: {
+                    show: true,
+                    fill: true,
+                    fillColor: {
+                        colors: ["rgba(255,255,255,.0)", "rgb(87, 104, 130, .7)"]
+                    }
+                }
+            },
+            {
+                label: "运营总成本（万）",
+                data: d3,
+                lines: {
+                    show: true,
+                    fill: true,
+                    fillColor: {
+                      colors: ["rgba(255,255,255,.0)", "rgba(183,236,240,.4)"]
+                    }
+                }
+            },
         ]);
 
         var options = {
             grid: {
                 backgroundColor:
                 {
-                    colors: ["#ffffff", "#f4f4f6"]
+                    colors: ["#f4f4f6", "#ffffff", "#ffffff"]
                 },
                 hoverable: true,
                 clickable: true,
@@ -181,7 +193,7 @@ $(function() {
                 radius: 3,
                 symbol: "circle"
             },
-            colors: ["#6a8abe", "#ff8673", "#65cea7"]
+            colors: ["#ff8673", "#6a8abe", "#65cea7"]
         };
         var plot = $.plot($("#main-chart #main-chart-container"), data, options);
     }
