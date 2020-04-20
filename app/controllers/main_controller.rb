@@ -1,7 +1,10 @@
 class MainController < ApplicationController
   def index
     @schedules = Schedule.limit(3)
-    @orders = Order.limit(10)
+    @orders = Order.onprogress.limit(10)
+    @car_heads = CarHead.limit(100)
+    @car_bodies = CarBody.limit(100)
+    @drivers = Driver.all.includes(:cur_orders)
   end
 
   def counts

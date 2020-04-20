@@ -10,7 +10,10 @@ class CarBodiesController < ApplicationController
   # GET /car_bodies/1
   # GET /car_bodies/1.json
   def show
-    @orders = @car_body.orders.includes(:drivers, :sales, :car_head, :car_body)
+    @count = params[:count] || 20
+    @page = params[:page] || 1
+    nonpaged_orders =  @car_body.orders.includes(:drivers, :sales, :car_head, :car_body)
+    @orders = nonpaged_orders.page(@page).per(@count)
   end
 
   # GET /car_bodies/new
@@ -29,7 +32,7 @@ class CarBodiesController < ApplicationController
 
     respond_to do |format|
       if @car_body.save
-        format.html { redirect_to @car_body, notice: 'Car body was successfully created.' }
+        format.html { redirect_to @car_body, notice: '挂车创建成功' }
         format.json { render :show, status: :created, location: @car_body }
       else
         format.html { render :new }
@@ -43,7 +46,7 @@ class CarBodiesController < ApplicationController
   def update
     respond_to do |format|
       if @car_body.update(car_body_params)
-        format.html { redirect_to @car_body, notice: 'Car body was successfully updated.' }
+        format.html { redirect_to @car_body, notice: '挂车更新成功' }
         format.json { render :show, status: :ok, location: @car_body }
       else
         format.html { render :edit }
@@ -57,7 +60,7 @@ class CarBodiesController < ApplicationController
   def destroy
     @car_body.destroy
     respond_to do |format|
-      format.html { redirect_to car_bodies_url, notice: 'Car body was successfully destroyed.' }
+      format.html { redirect_to car_bodies_url, notice: '挂车已删除' }
       format.json { head :no_content }
     end
   end
@@ -70,6 +73,6 @@ class CarBodiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_body_params
-      params.require(:car_body).permit(:body_id, :body_type, :max_weight, :brand, :status)
+      params.require(:car_body).permit(:body_id, :body_type, :max_weight, :brand, :status, :loc)
     end
 end

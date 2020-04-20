@@ -10,7 +10,10 @@ class CarHeadsController < ApplicationController
   # GET /car_heads/1
   # GET /car_heads/1.json
   def show
-    @orders = @car_head.orders.includes(:drivers, :sales, :car_head, :car_body)
+    @count = params[:count] || 20
+    @page = params[:page] || 1
+    nonpaged_orders =  @car_head.orders.includes(:drivers, :sales, :car_head, :car_body)
+    @orders = nonpaged_orders.page(@page).per(@count)
   end
 
   # GET /car_heads/new
@@ -29,7 +32,7 @@ class CarHeadsController < ApplicationController
 
     respond_to do |format|
       if @car_head.save
-        format.html { redirect_to @car_head, notice: 'Car head was successfully created.' }
+        format.html { redirect_to @car_head, notice: '车头创建成功.' }
         format.json { render :show, status: :created, location: @car_head }
       else
         format.html { render :new }
@@ -43,7 +46,7 @@ class CarHeadsController < ApplicationController
   def update
     respond_to do |format|
       if @car_head.update(car_head_params)
-        format.html { redirect_to @car_head, notice: 'Car head was successfully updated.' }
+        format.html { redirect_to @car_head, notice: '车头更新成功.' }
         format.json { render :show, status: :ok, location: @car_head }
       else
         format.html { render :edit }
@@ -57,7 +60,7 @@ class CarHeadsController < ApplicationController
   def destroy
     @car_head.destroy
     respond_to do |format|
-      format.html { redirect_to car_heads_url, notice: 'Car head was successfully destroyed.' }
+      format.html { redirect_to car_heads_url, notice: '车头已删除' }
       format.json { head :no_content }
     end
   end
@@ -70,6 +73,6 @@ class CarHeadsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_head_params
-      params.require(:car_head).permit(:car_number, :head_type, :fuel_type, :brand, :status)
+      params.require(:car_head).permit(:car_number, :head_type, :fuel_type, :brand, :status, :loc)
     end
 end

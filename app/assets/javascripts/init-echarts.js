@@ -29,6 +29,7 @@ function run(res) {
       if (!tmp_map[v]) tmp_map[v] = 1;
       else tmp_map[v]++;
     }
+    if (!tmp_map[key]) tmp_map[key] = 1;
     for (var tk of Object.keys(tmp_map)) {
       data.push([
         {

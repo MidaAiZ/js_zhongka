@@ -50,6 +50,7 @@
                                 <th>品牌</th>
                                 <th>燃料类型</th>
                                 <th>车头状态</th>
+                                <th>当前位置</th>
                                 <th>编辑</th>
                                 <th>删除</th>
                             </tr>
@@ -62,6 +63,7 @@
                                         <td><%= head.brand %></td>
                                         <td><%= head.fuel_type %></td>
                                         <td><%= head.status %></td>
+                                        <td><%= head.loc %></td>
                                         <td><a class="edit" href="javascript:;" data-id='<%= head.id %>'>编辑</a></td>
                                         <td><a class="delete" href="javascript:;" data-id='<%= head.id %>'>删除</a></td>
                                     </tr>

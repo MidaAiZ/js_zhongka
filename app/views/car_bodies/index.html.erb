@@ -50,6 +50,7 @@
                                 <th>品牌</th>
                                 <th>限重</th>
                                 <th>挂车状态</th>
+                                <th>当前位置</th>
                                 <th>编辑</th>
                                 <th>删除</th>
                             </tr>
@@ -62,6 +63,7 @@
                                         <td><%= car.brand %></td>
                                         <td><%= car.max_weight %></td>
                                         <td><%= car.status %></td>
+                                        <td><%= car.loc %></td>
                                         <td><a class="edit" href="javascript:;" data-id='<%= car.id %>'>编辑</a></td>
                                         <td><a class="delete" href="javascript:;" data-id='<%= car.id %>'>删除</a></td>
                                     </tr>

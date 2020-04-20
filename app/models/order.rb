@@ -143,8 +143,9 @@ class Order < ApplicationRecord
     map = {}
     os.each do |o|
       if !o.origin.blank? && !o.destination.blank? then
-         map[o.origin] ||= []
-         map[o.origin] << o.destination
+         ori = o.origin.end_with?('市') ? o.origin.chop : o.origin
+         map[ori] ||= []
+         map[ori] << (o.destination.end_with?('市') ? o.destination.chop : o.destination)
        end
     end
     map

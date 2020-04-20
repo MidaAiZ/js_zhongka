@@ -19,3 +19,29 @@ $(function() {
 		}
 	})
 })
+
+$(function() {
+	$('.edit-loc').click(function() {
+		var $this = $(this);
+		var $loc = $this.siblings('.loc');
+		if ($(this).text() == '编辑') {
+			var $loc = $(this).siblings('.loc');
+			$loc.html("<input class='input form-control' style='width:110px' value='"+ $loc.text() +"'>");
+			$(this).find('a').text('保存');
+		} else {
+			$.ajax({
+				method: "PATCH",
+				url: $(this).data("href"),
+				dataType: "JSON",
+				data: {
+					[$(this).data('attr')]: $loc.find("input").val(),
+				},
+				success: function(res) {
+					$loc.html(res["loc"]);
+					// $this.siblings('.updated-time').text(res['updated_at']);
+				}
+			})
+			$this.find('a').text('编辑');
+		}
+	})
+})

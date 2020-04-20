@@ -40,6 +40,10 @@
               <div class="title">状态</div>
               <div class="desk"><%= @car_body.status %></div>
             </li>
+            <li>
+              <div class="title">当前位置</div>
+              <div class="desk"><%= @car_body.loc %></div>
+            </li>
           </ul>
         </div>
       </div>
@@ -54,6 +58,7 @@
         </div>
         <div class="panel-body">
           <%= render "/orders/list" %>
+          <%= paginate @orders %>
         </div>
       </div>
     </div>

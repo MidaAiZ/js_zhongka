@@ -10,7 +10,10 @@ class SalesController < ApplicationController
   # GET /sales/1
   # GET /sales/1.json
   def show
-    @orders = @sale.orders.includes(:drivers, :sales, :car_head, :car_body)
+    @count = params[:count] || 20
+    @page = params[:page] || 1
+    nonpaged_orders =  @sale.orders.includes(:drivers, :sales, :car_head, :car_body)
+    @orders = nonpaged_orders.page(@page).per(@count)
   end
 
   # GET /sales/new

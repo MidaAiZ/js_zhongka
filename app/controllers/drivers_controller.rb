@@ -10,7 +10,10 @@ class DriversController < ApplicationController
   # GET /drivers/1
   # GET /drivers/1.json
   def show
-    @orders = @driver.orders.includes(:drivers, :sales, :car_head, :car_body)
+    @count = params[:count] || 20
+    @page = params[:page] || 1
+    nonpaged_orders =  @driver.orders.includes(:drivers, :sales, :car_head, :car_body)
+    @orders = nonpaged_orders.page(@page).per(@count)
   end
 
   # GET /drivers/new

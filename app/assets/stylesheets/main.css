@@ -40,6 +40,11 @@
 	overflow-y: hidden;
 }
 
+.car-loc-panel {
+	height: 300px;
+	overflow: auto;
+}
+
 @media screen and (max-width: 500px) {
 	.wrapper {
 	    padding: 15px !important;

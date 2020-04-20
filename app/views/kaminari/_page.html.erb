@@ -1,0 +1,9 @@
+<% if page.current? %>
+  <li class='active'>
+    <%= content_tag :a, page, remote: remote, rel: (page.next? ? '下一页' : (page.prev? ? '上一页' : nil)) %>
+  </li>
+<% else %>
+  <li>
+    <%= link_to page, url, remote: remote, rel: (page.next? ? '下一页' : (page.prev? ? '上一页' : nil)) %>
+  </li>
+<% end %>

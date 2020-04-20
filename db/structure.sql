@@ -73,7 +73,8 @@ CREATE TABLE public.car_bodies (
     status integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    max_weight character varying
+    max_weight character varying,
+    loc character varying DEFAULT ''::character varying
 );
 
 
@@ -108,7 +109,8 @@ CREATE TABLE public.car_heads (
     brand character varying,
     status integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    loc character varying DEFAULT ''::character varying
 );
 
 
@@ -527,6 +529,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200418151411'),
 ('20200418163238'),
 ('20200418173334'),
-('20200419052423');
+('20200419052423'),
+('20200420031256');
 
 
